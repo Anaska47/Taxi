@@ -1,9 +1,26 @@
 
+<<<<<<< HEAD
 import React from 'react';
 
 const Hero: React.FC = () => {
   // Using a high-quality static image for better performance and reliability
   const imageUrl = "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?q=80&w=2069&auto=format&fit=crop";
+=======
+import React, { useState, useEffect } from 'react';
+import { generateLuxuryImage } from '../services/imageService';
+
+const Hero: React.FC = () => {
+  const [imageUrl, setImageUrl] = useState<string>("https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?q=80&w=2069&auto=format&fit=crop");
+  
+  useEffect(() => {
+    const fetchImage = async () => {
+      const prompt = "Cinematic high-end photograph of a black Audi A4 Avant parked in a luxury hotel driveway at night, golden ambient lighting, elegant reflections on the polished Noir Mythic paint, no racing, serene atmosphere, 8k resolution.";
+      const generated = await generateLuxuryImage(prompt);
+      if (generated) setImageUrl(generated);
+    };
+    fetchImage();
+  }, []);
+>>>>>>> 595b434dc79218137e94e1c625611026e4d17c05
 
   return (
     <div className="relative h-screen min-h-[700px] overflow-hidden flex items-center">

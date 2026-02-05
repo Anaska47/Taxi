@@ -1,5 +1,13 @@
+<<<<<<< HEAD
 
 {
   "name": "SAM TAXI - Premium Transport Toulon",
   "description": "A luxury private chauffeur and CPAM-approved taxi service website featuring a cinematic dark theme, gold accents, and a high-end booking interface."
 }
+=======
+{
+  "name": "SAM TAXI - Premium Transport Toulon",
+  "description": "A luxury private chauffeur and CPAM-approved taxi service website featuring a cinematic dark theme, gold accents, and a high-end booking interface.",
+  "requestFramePermissions": []
+}
+>>>>>>> 595b434dc79218137e94e1c625611026e4d17c05

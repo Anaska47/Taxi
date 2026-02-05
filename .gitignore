@@ -1,11 +1,18 @@
+<<<<<<< HEAD
 # Dependencies
 node_modules/
+=======
+# Logs
+logs
+*.log
+>>>>>>> 595b434dc79218137e94e1c625611026e4d17c05
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
+<<<<<<< HEAD
 # Build outputs
 dist/
 dist-ssr/
@@ -19,6 +26,13 @@ dist-ssr/
 backend/.env
 backend/.env.local
 
+=======
+node_modules
+dist
+dist-ssr
+*.local
+
+>>>>>>> 595b434dc79218137e94e1c625611026e4d17c05
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -29,6 +43,7 @@ backend/.env.local
 *.njsproj
 *.sln
 *.sw?
+<<<<<<< HEAD
 
 # Logs
 logs/
@@ -42,3 +57,5 @@ Thumbs.db
 *.tmp
 *.temp
 .cache/
+=======
+>>>>>>> 595b434dc79218137e94e1c625611026e4d17c05

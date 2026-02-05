@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # SAM TAXI - Premium Transport Toulon
 
 Service de taxi premium à Toulon avec Audi A4 Avant Break Noir. Transport privé VIP, aéroports, gares et conventionné CPAM.
@@ -165,3 +166,25 @@ Propriété de SAM TAXI - Tous droits réservés
 
 **Version** : 1.0.0 (Prototype)  
 **Dernière mise à jour** : Février 2026
+=======
+<div align="center">
+<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
+</div>
+
+# Run and deploy your AI Studio app
+
+This contains everything you need to run your app locally.
+
+View your app in AI Studio: https://ai.studio/apps/drive/1H6Ot0cw_5ih_G92rd6A4gtuI3dvWN8_O
+
+## Run Locally
+
+**Prerequisites:**  Node.js
+
+
+1. Install dependencies:
+   `npm install`
+2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
+3. Run the app:
+   `npm run dev`
+>>>>>>> 595b434dc79218137e94e1c625611026e4d17c05

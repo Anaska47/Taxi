@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 
+<<<<<<< HEAD
 interface BookingFormData {
   pickup: string;
   destination: string;
@@ -128,6 +129,10 @@ const BookingSection: React.FC = () => {
       setErrors(prev => ({ ...prev, [name]: '' }));
     }
   };
+=======
+const BookingSection: React.FC = () => {
+  const [step, setStep] = useState(1);
+>>>>>>> 595b434dc79218137e94e1c625611026e4d17c05
 
   return (
     <div className="container mx-auto px-6 md:px-12">
@@ -137,10 +142,17 @@ const BookingSection: React.FC = () => {
             Réservez Votre <span className="text-gold italic">Expérience</span>
           </h2>
           <p className="text-white/60 text-lg mb-12 leading-relaxed">
+<<<<<<< HEAD
             Une interface simple et élégante pour planifier vos trajets en quelques clics.
             Confirmation immédiate et suivi de chauffeur disponible.
           </p>
 
+=======
+            Une interface simple et élégante pour planifier vos trajets en quelques clics. 
+            Confirmation immédiate et suivi de chauffeur disponible.
+          </p>
+          
+>>>>>>> 595b434dc79218137e94e1c625611026e4d17c05
           <ul className="space-y-6">
             {[
               'Disponibilité instantanée',
@@ -161,6 +173,7 @@ const BookingSection: React.FC = () => {
           <div className="absolute -top-px -left-px w-20 h-px bg-gradient-to-r from-gold to-transparent"></div>
           <div className="absolute -top-px -left-px w-px h-20 bg-gradient-to-b from-gold to-transparent"></div>
 
+<<<<<<< HEAD
           {submitSuccess && (
             <div className="mb-6 p-4 bg-green-500/10 border border-green-500/30 text-green-400 text-sm">
               ✓ Votre réservation a été enregistrée avec succès ! Nous vous contacterons sous peu.
@@ -261,11 +274,29 @@ const BookingSection: React.FC = () => {
                   onChange={handleChange}
                   min="1"
                   max="4"
+=======
+          <form className="space-y-8">
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <label className="text-[10px] uppercase tracking-widest text-white/40 font-bold">Lieu de départ</label>
+                <input 
+                  type="text" 
+                  placeholder="Ex: Gare de Toulon"
+                  className="w-full bg-white/5 border-b border-white/10 py-3 px-4 text-white focus:outline-none focus:border-gold transition-colors"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-[10px] uppercase tracking-widest text-white/40 font-bold">Destination</label>
+                <input 
+                  type="text" 
+                  placeholder="Ex: Aéroport Marseille"
+>>>>>>> 595b434dc79218137e94e1c625611026e4d17c05
                   className="w-full bg-white/5 border-b border-white/10 py-3 px-4 text-white focus:outline-none focus:border-gold transition-colors"
                 />
               </div>
             </div>
 
+<<<<<<< HEAD
             <div className="space-y-2">
               <label className="text-[10px] uppercase tracking-widest text-white/40 font-bold">
                 Votre nom *
@@ -320,6 +351,33 @@ const BookingSection: React.FC = () => {
               {isSubmitting ? 'Envoi en cours...' : 'Confirmer la réservation'}
             </button>
 
+=======
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="space-y-2">
+                <label className="text-[10px] uppercase tracking-widest text-white/40 font-bold">Date & Heure</label>
+                <input 
+                  type="datetime-local" 
+                  className="w-full bg-white/5 border-b border-white/10 py-3 px-4 text-white focus:outline-none focus:border-gold transition-colors"
+                />
+              </div>
+              <div className="space-y-2">
+                <label className="text-[10px] uppercase tracking-widest text-white/40 font-bold">Type de service</label>
+                <select className="w-full bg-white/5 border-b border-white/10 py-3 px-4 text-white focus:outline-none focus:border-gold transition-colors appearance-none cursor-pointer">
+                  <option className="bg-charcoal text-white">Privé (Berline)</option>
+                  <option className="bg-charcoal text-white">Conventionné CPAM</option>
+                  <option className="bg-charcoal text-white">Aéroport / Longue distance</option>
+                </select>
+              </div>
+            </div>
+
+            <button 
+              type="button"
+              className="w-full py-5 bg-gold text-black text-xs font-black uppercase tracking-[0.3em] hover:bg-white transition-all duration-500 shadow-xl"
+            >
+              Vérifier la disponibilité
+            </button>
+            
+>>>>>>> 595b434dc79218137e94e1c625611026e4d17c05
             <p className="text-center text-[10px] text-white/30 uppercase tracking-widest">
               Pas d'acompte requis pour les réservations locales
             </p>
