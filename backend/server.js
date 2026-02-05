@@ -1,6 +1,16 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+
+dotenv.config();
+
+const app = express();
+const PORT = process.env.PORT || 3001;
+
+// Middleware
+app.use(cors());
+app.use(express.json());
+
 // Health check endpoint
 app.get('/api/health', (req, res) => {
     res.json({ status: 'ok', message: 'SAM TAXI Backend is running' });
@@ -18,12 +28,6 @@ app.post('/api/booking', async (req, res) => {
             });
         }
 
-        // Here you would typically:
-        // 1. Save to database
-        // 2. Send confirmation email
-        // 3. Send SMS notification
-        // 4. Notify admin
-
         console.log('📅 Nouvelle réservation:', {
             pickup,
             destination,
@@ -37,7 +41,6 @@ app.post('/api/booking', async (req, res) => {
             timestamp: new Date().toISOString()
         });
 
-        // For now, just return success
         res.json({
             success: true,
             message: 'Votre réservation a été enregistrée avec succès. Nous vous contacterons sous peu pour confirmation.',
@@ -85,7 +88,6 @@ app.post('/api/contact', async (req, res) => {
 
 app.listen(PORT, () => {
     console.log(`🚖 SAM TAXI Backend running on http://localhost:${PORT}`);
-    console.log(`📡 API endpoints:`);
     console.log(`   - GET  /api/health`);
     console.log(`   - POST /api/booking`);
     console.log(`   - POST /api/contact`);
