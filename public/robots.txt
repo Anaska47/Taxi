@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://samtaxi-toulon.fr/sitemap.xml
