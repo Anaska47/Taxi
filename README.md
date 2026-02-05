@@ -26,17 +26,13 @@ cd ..
 
 1. **Frontend (.env.local)**
 ```bash
-VITE_GEMINI_API_KEY=PLACEHOLDER_API_KEY
 VITE_API_URL=http://localhost:3001
 ```
 
 2. **Backend (backend/.env)**
 ```bash
-GEMINI_API_KEY=votre_clé_api_gemini_ici
 PORT=3001
 ```
-
-> ⚠️ **Important** : Obtenez votre clé API Gemini sur [Google AI Studio](https://ai.google.dev/)
 
 ### Lancement
 
@@ -63,14 +59,11 @@ sam-taxi/
 ├── components/           # Composants React
 │   ├── Hero.tsx         # Section héro
 │   ├── BookingSection.tsx  # Formulaire de réservation
-│   ├── ConciergeAI.tsx  # Assistant IA
 │   ├── Features.tsx     # Services
 │   ├── Fleet.tsx        # Flotte
 │   ├── CPAMSection.tsx  # Section CPAM
 │   ├── Navbar.tsx       # Navigation
 │   └── Footer.tsx       # Pied de page
-├── services/            # Services API
-│   └── geminiService.ts # Service Gemini AI
 ├── backend/             # Serveur Express
 │   ├── server.js        # API backend
 │   └── package.json     # Dépendances backend
@@ -88,7 +81,6 @@ sam-taxi/
 ### ✅ Implémentées
 - ✅ Design premium avec thème sombre et accents dorés
 - ✅ Formulaire de réservation avec validation complète
-- ✅ Assistant IA conversationnel (Concierge)
 - ✅ Backend sécurisé avec Express.js
 - ✅ SEO optimisé (meta tags, Schema.org, sitemap)
 - ✅ Responsive design

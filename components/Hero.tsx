@@ -1,18 +1,7 @@
 
 import React, { useState, useEffect } from 'react';
-import { generateLuxuryImage } from '../services/imageService';
-
 const Hero: React.FC = () => {
-  const [imageUrl, setImageUrl] = useState<string>("https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?q=80&w=2069&auto=format&fit=crop");
-
-  useEffect(() => {
-    const fetchImage = async () => {
-      const prompt = "Cinematic high-end photograph of a black Audi A4 Avant parked in a luxury hotel driveway at night, golden ambient lighting, elegant reflections on the polished Noir Mythic paint, no racing, serene atmosphere, 8k resolution.";
-      const generated = await generateLuxuryImage(prompt);
-      if (generated) setImageUrl(generated);
-    };
-    fetchImage();
-  }, []);
+  const imageUrl = "https://images.unsplash.com/photo-1603584173870-7f23fdae1b7a?q=80&w=2069&auto=format&fit=crop";
 
   return (
     <div className="relative h-screen min-h-[700px] overflow-hidden flex items-center">

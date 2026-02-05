@@ -7,7 +7,6 @@ import Features from './components/Features';
 import Fleet from './components/Fleet';
 import CPAMSection from './components/CPAMSection';
 import Footer from './components/Footer';
-import ConciergeAI from './components/ConciergeAI';
 
 const App: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -23,7 +22,7 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen selection:bg-amber-500 selection:text-black">
       <Navbar scrolled={scrolled} />
-      
+
       <main>
         <section id="accueil">
           <Hero />
@@ -47,9 +46,7 @@ const App: React.FC = () => {
       </main>
 
       <Footer />
-      
-      {/* Floating AI Assistant */}
-      <ConciergeAI />
+
     </div>
   );
 };
