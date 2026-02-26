@@ -85,10 +85,21 @@ const BookingSection: React.FC = () => {
 
     try {
       // Priority 1: Google Sheets
-      await sendToGoogleSheet({
-        ...formData,
+      const sheetData = {
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        pickup: formData.pickup,
+        destination: formData.destination,
+        date: formData.date,
+        time: formData.time,
+        serviceType: formData.serviceType,
+        passengers: formData.passengers,
         type: formData.serviceType === 'conventionné' ? 'medical' : 'private'
-      });
+      };
+
+      console.log("DEBUG: Data being sent to sendToGoogleSheet:", sheetData);
+      await sendToGoogleSheet(sheetData);
 
       // Priority 2: Backend API (Optional backup)
       try {
