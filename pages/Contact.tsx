@@ -36,7 +36,7 @@ const Contact = () => {
                         </div>
                         <div>
                             <h3 className="text-xs font-black text-gray-400 uppercase mb-3 tracking-widest">Autorisation</h3>
-                            <p className="font-extrabold text-gray-900 text-lg">Toulon – ADS n°19</p>
+                            <p className="font-extrabold text-gray-900 text-lg">Toulon ADS n°19</p>
                             <p className="text-sm text-muted mt-1 font-medium">Commune de rattachement officielle</p>
                         </div>
                     </div>

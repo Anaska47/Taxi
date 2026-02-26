@@ -40,7 +40,7 @@ const Home = () => {
                         <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '2rem' }}>
                             <span className="badge-premium">Disponible 24h/24 • 7j/7</span>
                             <span style={{ width: '40px', height: '1px', background: 'rgba(255,255,255,0.3)' }}></span>
-                            <span style={{ fontSize: '0.62rem', fontWeight: 800, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)' }}>ADS n°19 • Toulon</span>
+                            <span style={{ fontSize: '0.62rem', fontWeight: 800, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(255,255,255,0.5)' }}>Toulon ADS n°19</span>
                         </div>
 
                         {/* Main title */}
@@ -145,7 +145,7 @@ const Home = () => {
 
                             <div style={{ padding: '1rem 1.5rem', border: '1px solid rgba(26,54,93,0.15)', borderRadius: '10px', background: '#f0f5ff', display: 'inline-block' }}>
                                 <p style={{ fontSize: '0.6rem', fontWeight: 800, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#2b6cb0', marginBottom: '0.25rem' }}>Autorisation Officielle</p>
-                                <p style={{ fontFamily: "'Playfair Display', serif", color: '#1a365d', fontSize: '1rem' }}>Taxi Conventionné CPAM — ADS n°19 - Toulon</p>
+                                <p style={{ fontFamily: "'Playfair Display', serif", color: '#1a365d', fontSize: '1rem' }}>Taxi Conventionné CPAM — Toulon ADS n°19</p>
                             </div>
                         </div>
 
