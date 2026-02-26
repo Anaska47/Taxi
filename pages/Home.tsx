@@ -71,7 +71,7 @@ const Home = () => {
                                 ))}
                             </div>
                             <p style={{ fontSize: '0.82rem', color: 'rgba(255,255,255,0.5)' }}>
-                                <span style={{ color: 'rgba(165,200,255,0.9)', fontWeight: 800 }}>+500 trajets</span> réalisés avec soin ce mois-ci
+                                <span style={{ color: 'rgba(165,200,255,0.9)', fontWeight: 800 }}>Excellence & Bienveillance</span> à chaque instant de votre trajet
                             </p>
                         </div>
                     </div>
