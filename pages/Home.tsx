@@ -126,7 +126,7 @@ const Home = () => {
 
                             <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '2rem' }}>
                                 {[
-                                    { dept: '83', label: 'Var', note: 'Siège Social' },
+                                    { dept: '83', label: 'Brignoles', note: 'Siège Social' },
                                     { dept: '83', label: 'Toulon', note: 'Rattachement' },
                                     { dept: '13', label: 'B.‑du‑Rhône', note: '' },
                                     { dept: '06', label: 'A.‑Maritimes', note: '' },
@@ -145,7 +145,7 @@ const Home = () => {
 
                             <div style={{ padding: '1rem 1.5rem', border: '1px solid rgba(26,54,93,0.15)', borderRadius: '10px', background: '#f0f5ff', display: 'inline-block' }}>
                                 <p style={{ fontSize: '0.6rem', fontWeight: 800, letterSpacing: '0.2em', textTransform: 'uppercase', color: '#2b6cb0', marginBottom: '0.25rem' }}>Autorisation Officielle</p>
-                                <p style={{ fontFamily: "'Playfair Display', serif", color: '#1a365d', fontSize: '1rem' }}>Taxi Conventionné CPAM — ADS n°19</p>
+                                <p style={{ fontFamily: "'Playfair Display', serif", color: '#1a365d', fontSize: '1rem' }}>Taxi Conventionné CPAM — ADS n°19 - Toulon</p>
                             </div>
                         </div>
 
@@ -189,8 +189,8 @@ const Home = () => {
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
                         {[
                             { icon: '🕐', title: 'Ponctualité', desc: 'Présent à l\'heure, à chaque rendez-vous, sans exception. Votre temps est précieux.' },
-                            { icon: '🛡️', title: 'Confort & Sécurité', desc: 'Audi A4 Avant récente, climatisée, désinfectée. Un voyage dans les meilleures conditions.' },
-                            { icon: '🤝', title: 'Bienveillance', desc: 'Chauffeur formé à l\'accompagnement médical, à l\'écoute de vos besoins.' },
+                            { icon: '🛡️', title: 'Confort & Sécurité', desc: 'Audi A4 break récente, climatisée, désinfectée. Bonne capacité du coffre pour vos baguages.' },
+                            { icon: '🤝', title: 'Bienveillance', desc: 'Chauffeur expérimenté (10 ans), formé à l\'accompagnement médical.' },
                         ].map((item) => (
                             <div key={item.title} className="card" style={{ background: '#ffffff', textAlign: 'center' }}>
                                 <div style={{ fontSize: '2.2rem', marginBottom: '1.25rem' }}>{item.icon}</div>
@@ -233,7 +233,7 @@ const Home = () => {
                             <div style={{ fontSize: '2.2rem', marginBottom: '1.25rem' }}>✈️</div>
                             <h3 style={{ fontSize: '1.3rem', marginBottom: '0.85rem', color: '#1a365d' }}>Service Premium</h3>
                             <p style={{ color: '#718096', lineHeight: 1.8, marginBottom: '2rem', fontSize: '0.9rem' }}>
-                                Gare, aéroport, événement privé — bénéficiez d'une Audi A4 Avant et d'une ponctualité exemplaire pour vos déplacements personnels.
+                                Gare, aéroport, événement privé — bénéficiez d'un break Audi A4 avec un coffre spacieux pour vos baguages et d'une ponctualité exemplaire.
                             </p>
                             <Link to="/prive" style={{ fontSize: '0.7rem', fontWeight: 900, letterSpacing: '0.18em', textTransform: 'uppercase', color: '#2b6cb0', textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                                 Réserver une Course ➔

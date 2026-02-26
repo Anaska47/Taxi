@@ -8,28 +8,33 @@ const Hero: React.FC = () => {
       <div className="absolute inset-0">
         <img
           src={imageUrl}
-          alt="Audi A4 Avant Break Noir - Prestige"
+          alt="Audi A4 break Noir - Prestige"
           className="w-full h-full object-cover grayscale-[0.2] transition-opacity duration-1000"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black via-black/70 to-transparent"></div>
-        <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-black/40"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
       </div>
 
       <div className="container mx-auto px-6 md:px-12 relative z-10">
-        <div className="max-w-4xl space-y-8">
-          <div className="inline-flex items-center space-x-3 px-4 py-1.5 border border-gold/40 bg-black/40 backdrop-blur-md text-gold text-[10px] md:text-xs uppercase tracking-[0.4em]">
-            <span className="w-2 h-2 bg-gold rounded-full"></span>
-            <span>Audi A4 Avant • Excellence & Confort</span>
+        <div className="max-w-4xl pt-20">
+          <div className="flex items-center space-x-4 mb-8">
+            <div className="w-12 h-px bg-gold"></div>
+            <span className="text-gold text-xs font-black uppercase tracking-[0.4em]">Service de Prestige</span>
           </div>
 
-          <h1 className="text-6xl md:text-8xl lg:text-9xl leading-tight font-serif text-white">
-            SAM <span className="block italic font-light text-gold/90">TAXI</span>
+          <p className="inline-flex items-center space-x-3 px-4 py-2 bg-white/5 border border-white/10 backdrop-blur-md rounded-full text-[10px] text-white/60 font-medium tracking-widest uppercase mb-12">
+            <span className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse"></span>
+            <span>Audi A4 break • Excellence & Confort</span>
+          </p>
+
+          <h1 className="text-6xl md:text-8xl lg:text-9xl font-serif text-white mb-10 leading-[0.9] tracking-tight">
+            L'Élégance de vos <br />
+            <span className="text-gold italic">Déplacements</span>
           </h1>
 
-          <div className="h-px w-32 bg-gold mb-6 shadow-[0_0_15px_rgba(212,175,55,0.5)]"></div>
-
-          <p className="text-xl md:text-3xl text-white/80 max-w-2xl font-light leading-tight">
-            L'élégance d'un voyage en <span className="text-white font-semibold border-b border-gold/30">Audi A4 Break Noir</span>.
+          <p className="text-xl md:text-2xl text-white/50 mb-16 max-w-2xl leading-relaxed font-light">
+            Découvrez un standard supérieur de transport privé.
+            L'élégance d'un voyage en <span className="text-white font-semibold border-b border-gold/30">Audi A4 break Noir</span>.
             Le luxe du silence et le confort absolu.
           </p>
 

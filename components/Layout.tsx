@@ -34,7 +34,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
             <header className={`navbar ${scrolled ? 'scrolled' : ''}`}>
                 <div className="container navbar-inner">
                     <Link to="/" className="logo-container">
-                        <span className="logo-main">SAM <span>TAXI</span></span>
+                        <span className="logo-main">SAM <span>TAXI et privé</span></span>
                         <span className="logo-sub">Transport Médical Conventionné</span>
                     </Link>
 
@@ -91,14 +91,14 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                     <div className="grid md:grid-cols-3 gap-16 mb-16">
                         <div>
                             <div className="logo-container" style={{ marginBottom: '1.5rem' }}>
-                                <span className="logo-main">SAM <span>TAXI</span></span>
+                                <span className="logo-main">SAM <span>TAXI et privé</span></span>
                                 <span className="logo-sub">Transport Médical Conventionné</span>
                             </div>
                             <p style={{ color: 'rgba(255,255,255,0.55)', fontSize: '0.85rem', lineHeight: 1.8, maxWidth: '260px' }}>
                                 Service d'élite en transport assis professionnalisé. Engagé pour votre confort dans toute la région PACA.
                             </p>
                             <div style={{ marginTop: '2rem', display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
-                                <span style={{ fontSize: '0.62rem', fontWeight: 800, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#90cdf4', border: '1px solid rgba(144,205,244,0.3)', borderRadius: '4px', padding: '4px 10px' }}>ADS n°19</span>
+                                <span style={{ fontSize: '0.62rem', fontWeight: 800, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#90cdf4', border: '1px solid rgba(144,205,244,0.3)', borderRadius: '4px', padding: '4px 10px' }}>ADS n°19 - Toulon</span>
                                 <span style={{ fontSize: '0.62rem', fontWeight: 800, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#90cdf4', border: '1px solid rgba(144,205,244,0.3)', borderRadius: '4px', padding: '4px 10px' }}>CPAM</span>
                                 <span style={{ fontSize: '0.62rem', fontWeight: 800, letterSpacing: '0.15em', textTransform: 'uppercase', color: '#90cdf4', border: '1px solid rgba(144,205,244,0.3)', borderRadius: '4px', padding: '4px 10px' }}>24h/24</span>
                             </div>
@@ -108,8 +108,8 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                             <p className="section-label" style={{ marginBottom: '1.5rem', display: 'block' }}>Zone d'Intervention</p>
                             <ul style={{ listStyle: 'none', display: 'flex', flexDirection: 'column', gap: '0.85rem' }}>
                                 {[
-                                    ['83', 'Toulon — Siège Social'],
-                                    ['83', 'Brignoles'],
+                                    ['83', 'Brignoles — Siège Social'],
+                                    ['83', 'Toulon'],
                                     ['13', 'Bouches-du-Rhône'],
                                     ['06', 'Alpes-Maritimes'],
                                     ['04', 'Alpes-de-Haute-Provence'],
@@ -132,7 +132,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
                             <div style={{ padding: '1rem 1.5rem', border: '1px solid rgba(144,205,244,0.25)', borderRadius: '12px', background: 'rgba(144,205,244,0.07)' }}>
                                 <p style={{ fontSize: '0.6rem', fontWeight: 800, letterSpacing: '0.2em', textTransform: 'uppercase', color: 'rgba(144,205,244,0.7)', marginBottom: '0.3rem' }}>Conventionné</p>
                                 <p style={{ fontFamily: "'Playfair Display', serif", fontStyle: 'italic', fontSize: '1.1rem', color: 'white' }}>Taxi CPAM</p>
-                                <p style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.35)', marginTop: '0.35rem' }}>Autorisation ADS n°19</p>
+                                <p style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.35)', marginTop: '0.35rem' }}>Autorisation ADS n°19 - Toulon</p>
                             </div>
                         </div>
                     </div>

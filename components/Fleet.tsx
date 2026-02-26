@@ -47,7 +47,7 @@ const Fleet: React.FC = () => {
     },
     {
       name: "Volume & Prestige",
-      model: "Audi A4 Avant (Break)",
+      model: "Audi A4 break",
       specs: "Coffre Spacieux • 4 Valises",
       desc: "Le choix parfait pour vos transferts. L'espace généreux de notre break accueille tous vos bagages avec élégance.",
       fallbackImg: "https://images.unsplash.com/photo-1606155609460-234679413204?q=80&w=2070&auto=format&fit=crop",
