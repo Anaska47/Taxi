@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { sendToGoogleSheet } from '../lib/googleSheets';
 
 interface BookingFormData {
   pickup: string;
@@ -83,37 +84,43 @@ const BookingSection: React.FC = () => {
     setIsSubmitting(true);
 
     try {
-      const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
-      const response = await fetch(`${API_URL}/api/booking`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
+      // Priority 1: Google Sheets
+      await sendToGoogleSheet({
+        ...formData,
+        type: formData.serviceType === 'conventionné' ? 'medical' : 'private'
       });
 
-      const data = await response.json();
-
-      if (response.ok) {
-        setSubmitSuccess(true);
-        // Reset form
-        setFormData({
-          pickup: '',
-          destination: '',
-          date: '',
-          time: '',
-          passengers: 1,
-          serviceType: 'privé',
-          name: '',
-          phone: '',
-          email: '',
-        });
-      } else {
-        setSubmitError(data.error || 'Une erreur est survenue');
+      // Priority 2: Backend API (Optional backup)
+      try {
+        const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3001';
+        const mode = import.meta.env.MODE; // Get Vite environment mode
+        if (API_URL && (!API_URL.includes('localhost') || mode === 'development')) {
+          await fetch(`${API_URL}/api/booking`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formData),
+          });
+        }
+      } catch (e) {
+        console.warn("Backend API backup failed", e);
       }
+
+      setSubmitSuccess(true);
+      // Reset form
+      setFormData({
+        pickup: '',
+        destination: '',
+        date: '',
+        time: '',
+        passengers: 1,
+        serviceType: 'privé',
+        name: '',
+        phone: '',
+        email: '',
+      });
     } catch (error) {
-      console.error('Booking error:', error);
-      setSubmitError('Impossible de contacter le serveur. Veuillez réessayer.');
+      console.error("Submission error:", error);
+      setSubmitError('Une erreur est survenue. Veuillez nous appeler directement.');
     } finally {
       setIsSubmitting(false);
     }
