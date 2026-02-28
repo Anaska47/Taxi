@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { sendToGoogleSheet } from '../lib/googleSheets';
+import AddressAutocomplete from './AddressAutocomplete';
 
 interface BookingFormData {
   pickup: string;
@@ -190,34 +191,22 @@ const BookingSection: React.FC = () => {
 
           <form className="space-y-8" onSubmit={handleSubmit}>
             <div className="grid md:grid-cols-2 gap-6">
-              <div className="space-y-2">
-                <label className="text-[10px] uppercase tracking-widest text-white/40 font-bold">
-                  Lieu de départ *
-                </label>
-                <input
-                  type="text"
-                  name="pickup"
-                  value={formData.pickup}
-                  onChange={handleChange}
-                  placeholder="Ex: Gare de Toulon"
-                  className={`w-full bg-white/5 border-b ${errors.pickup ? 'border-red-500' : 'border-white/10'} py-3 px-4 text-white focus:outline-none focus:border-gold transition-colors`}
-                />
-                {errors.pickup && <p className="text-red-400 text-xs">{errors.pickup}</p>}
-              </div>
-              <div className="space-y-2">
-                <label className="text-[10px] uppercase tracking-widest text-white/40 font-bold">
-                  Destination *
-                </label>
-                <input
-                  type="text"
-                  name="destination"
-                  value={formData.destination}
-                  onChange={handleChange}
-                  placeholder="Ex: Aéroport Marseille"
-                  className={`w-full bg-white/5 border-b ${errors.destination ? 'border-red-500' : 'border-white/10'} py-3 px-4 text-white focus:outline-none focus:border-gold transition-colors`}
-                />
-                {errors.destination && <p className="text-red-400 text-xs">{errors.destination}</p>}
-              </div>
+              <AddressAutocomplete
+                label="Lieu de départ *"
+                name="pickup"
+                value={formData.pickup}
+                onChange={handleChange}
+                placeholder="Ex: Gare de Toulon"
+                error={errors.pickup}
+              />
+              <AddressAutocomplete
+                label="Destination *"
+                name="destination"
+                value={formData.destination}
+                onChange={handleChange}
+                placeholder="Ex: Aéroport Marseille"
+                error={errors.destination}
+              />
             </div>
 
             <div className="grid md:grid-cols-2 gap-6">
