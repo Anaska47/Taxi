@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { supabase } from '../lib/supabase';
 import ProgressSteps from '../components/ProgressSteps';
 import { sendToGoogleSheet } from '../lib/googleSheets';
+import AddressAutocomplete from '../components/AddressAutocomplete';
 
 const Private = () => {
     const [step, setStep] = useState(1);
@@ -128,32 +129,22 @@ const Private = () => {
                                     </div>
 
                                     <div className="grid gap-6">
-                                        <div className="form-group mb-0">
-                                            <label htmlFor="pickup">Point de départ</label>
-                                            <input
-                                                id="pickup"
-                                                type="text"
-                                                name="pickup"
-                                                value={formData.pickup}
-                                                onChange={handleChange}
-                                                required
-                                                placeholder="Gare, Aéroport, Domicile..."
-                                                title="Indiquez le lieu de départ"
-                                            />
-                                        </div>
-                                        <div className="form-group mb-0">
-                                            <label htmlFor="destination">Destination</label>
-                                            <input
-                                                id="destination"
-                                                type="text"
-                                                name="destination"
-                                                value={formData.destination}
-                                                onChange={handleChange}
-                                                required
-                                                placeholder="Ville, hôtel ou adresse précise"
-                                                title="Indiquez le lieu d'arrivée"
-                                            />
-                                        </div>
+                                        <AddressAutocomplete
+                                            label="Point de départ"
+                                            name="pickup"
+                                            value={formData.pickup}
+                                            onChange={handleChange}
+                                            placeholder="Gare, Aéroport, Domicile..."
+                                            variant="light"
+                                        />
+                                        <AddressAutocomplete
+                                            label="Destination"
+                                            name="destination"
+                                            value={formData.destination}
+                                            onChange={handleChange}
+                                            placeholder="Ville, hôtel ou adresse précise"
+                                            variant="light"
+                                        />
                                     </div>
 
                                     <button

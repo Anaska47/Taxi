@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { supabase } from '../lib/supabase';
 import ProgressSteps from '../components/ProgressSteps';
 import { sendToGoogleSheet } from '../lib/googleSheets';
+import AddressAutocomplete from '../components/AddressAutocomplete';
 
 const Medical = () => {
     const [step, setStep] = useState(1);
@@ -138,30 +139,22 @@ const Medical = () => {
                                         </button>
                                     </div>
 
-                                    <div className="form-group">
-                                        <label htmlFor="pickup">Lieu de prise en charge</label>
-                                        <input
-                                            id="pickup"
-                                            type="text"
+                                    <div className="grid gap-6">
+                                        <AddressAutocomplete
+                                            label="Lieu de prise en charge"
                                             name="pickup"
                                             value={formData.pickup}
                                             onChange={handleChange}
-                                            required
                                             placeholder="Ex: 56 Rue de l'Hôpital, Toulon"
-                                            title="Indiquez l'adresse de départ"
+                                            variant="light"
                                         />
-                                    </div>
-                                    <div className="form-group">
-                                        <label htmlFor="destination">Établissement de Santé</label>
-                                        <input
-                                            id="destination"
-                                            type="text"
+                                        <AddressAutocomplete
+                                            label="Établissement de Santé"
                                             name="destination"
                                             value={formData.destination}
                                             onChange={handleChange}
-                                            required
                                             placeholder="Nom de l'hôpital, clinique ou centre"
-                                            title="Indiquez le lieu de destination"
+                                            variant="light"
                                         />
                                     </div>
 
