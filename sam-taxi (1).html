@@ -5,14 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <title>Sam Taxi — Réservez en 30 secondes</title>
-  <meta name="description"
-    content="Réservez votre taxi à Toulon et dans le Var. Transport privé et médical conventionné CPAM disponible 24h/24 et 7j/7.">
-  <meta property="og:title" content="Sam Taxi — Votre chauffeur privé & médical dans le Var">
-  <meta property="og:description"
-    content="Réservez votre taxi en 30 secondes. Transferts aéroports, gares et transport médical conventionné.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="IMG20260205WA0005.jpg">
-  <script type="application/ld+json" id="seo-ld"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link
     href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap"
@@ -861,7 +853,6 @@
       padding: 12px 16px;
       background: rgba(10, 10, 10, 0.95);
       backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
       border-top: 1px solid var(--border);
       z-index: 200;
       gap: 10px;
@@ -911,7 +902,6 @@
       z-index: 300;
       background: rgba(0, 0, 0, 0.85);
       backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
       display: none;
       align-items: center;
       justify-content: center;
@@ -1560,7 +1550,6 @@
       border-radius: 12px;
       transition: all .25s;
       user-select: none;
-      -webkit-user-select: none;
     }
 
     .recurring-toggle:hover .recurring-toggle-box {
@@ -1673,7 +1662,7 @@
       font-weight: 600;
     }
 
-
+    .recurring-email-row {}
 
     .recurring-notice {
       font-size: 12px;
@@ -1928,33 +1917,6 @@
           </div>
         </div>
 
-        <!-- TRIP TYPE (Round Trip) -->
-        <div style="font-size:12px;color:var(--muted);margin-bottom:8px;margin-top:16px;">🔄 Type de trajet</div>
-        <div class="trip-type-selector">
-          <label class="trip-type-option">
-            <input type="radio" name="tripType" value="aller-simple" checked onchange="toggleReturnFields(false)">
-            <span>Aller simple</span>
-          </label>
-          <label class="trip-type-option">
-            <input type="radio" name="tripType" value="aller-retour" onchange="toggleReturnFields(true)">
-            <span>Aller-Retour</span>
-          </label>
-        </div>
-
-        <!-- RETURN DATETIME (hidden until "Aller-Retour") -->
-        <div class="datetime-row" id="returnRow" style="display:none; margin-top:12px;">
-          <div style="grid-column: 1 / -1; font-size:12px; color:var(--gold); margin-bottom:4px;">📅 Retour prévu le :
-          </div>
-          <div class="field-row">
-            <div class="field-icon">📅</div>
-            <input type="date" id="returnDateInput" style="padding:14px 10px 14px 0">
-          </div>
-          <div class="field-row">
-            <div class="field-icon">🕐</div>
-            <input type="time" id="returnTimeInput" style="padding:14px 10px 14px 0">
-          </div>
-        </div>
-
         <!-- MEDICAL EXTRAS -->
         <div class="medical-extras" id="medicalExtras">
           <div class="extra-label">🏥 Informations médicales</div>
@@ -2171,13 +2133,28 @@
       </div>
     </div>
 
-    <div class="car-single-display fade-up" style="max-width: 900px; margin: 0 auto; padding: 0 20px;">
-      <div class="car-photo" style="border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
-        <img src="audi-a4-sam-taxi.png" alt="Audi A4 Break Sam Taxi Toulon"
-          style="aspect-ratio: 16/9; width: 100%; object-fit: cover;">
-        <div class="car-photo-overlay"
-          style="opacity: 1; background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 40%);">
-          <div class="car-photo-label" style="font-size: 16px;">Votre berline premium prête pour le départ</div>
+    <div class="car-grid">
+      <div class="car-photo">
+        <img src="IMG20260205WA0005.jpg" alt="Audi A4 Break Sam Taxi Toulon" loading="lazy"
+          onerror="this.parentElement.style.background='linear-gradient(135deg,#1a1500,#0a0a0a)';this.style.display='none'">
+        <div class="car-photo-overlay">
+          <div class="car-photo-label">Audi A4 Break · Vue latérale</div>
+        </div>
+      </div>
+
+      <div class="car-photo">
+        <img src="IMG20260205WA0007.jpg" alt="Audi A4 Break Taxi Toulon" loading="lazy"
+          onerror="this.parentElement.style.background='linear-gradient(135deg,#0d1a0d,#0a0a0a)';this.style.display='none'">
+        <div class="car-photo-overlay">
+          <div class="car-photo-label">Vue avant · Toulon</div>
+        </div>
+      </div>
+
+      <div class="car-photo">
+        <img src="IMG20260205WA0006.jpg" alt="Lumineux Taxi Toulon" loading="lazy"
+          onerror="this.parentElement.style.background='linear-gradient(135deg,#1a1200,#0a0a0a)';this.style.display='none'">
+        <div class="car-photo-overlay">
+          <div class="car-photo-label">Lumineux officiel</div>
         </div>
       </div>
     </div>
@@ -2280,7 +2257,8 @@
   <!-- CINEMATIC CAR FOOTER -->
   <div class="car-cinematic">
     <div class="car-cinematic-img-wrap">
-      <img src="audi-a4-sam-taxi.png" alt="Audi A4 Break Sam Taxi" onerror="this.parentElement.classList.add('no-img')">
+      <img src="IMG20260205WA0005.jpg" alt="Audi A4 Break Sam Taxi"
+        onerror="this.parentElement.classList.add('no-img')">
       <div class="car-cinematic-fade-left"></div>
       <div class="car-cinematic-fade-right"></div>
       <div class="car-cinematic-fade-bottom"></div>
@@ -2307,57 +2285,6 @@
     </div>
     <p style="margin-top:16px;font-size:11px;">© 2025 Sam Taxi — Tous droits réservés</p>
   </footer>
-
-  <!-- MODAL OVERLAY -->
-  <div class="modal-overlay" id="modalOverlay" onclick="closeModalOutside(event)">
-    <div class="modal" id="modalBox">
-      <button class="modal-close" onclick="closeModal()">✕</button>
-
-      <!-- STEP 1: LEAD FORM -->
-      <div id="step1">
-        <div class="modal-title">Finaliser la demande</div>
-        <div class="modal-sub" id="modalSub">Transport privé · Vos coordonnées</div>
-
-        <div class="progress-bar">
-          <div class="progress-fill" id="progressFill" style="width: 50%;"></div>
-        </div>
-
-        <div class="modal-summary" id="modalSummary">
-          <div class="sum-row"><span class="sum-label">Départ :</span> <span class="sum-value" id="sumFrom">...</span>
-          </div>
-          <div class="sum-row"><span class="sum-label">Destination :</span> <span class="sum-value"
-              id="sumTo">...</span></div>
-          <div class="sum-row"><span class="sum-label">Horaire :</span> <span class="sum-value" id="sumTime">...</span>
-          </div>
-          <div class="sum-row"><span class="sum-label">Passagers :</span> <span class="sum-value"
-              id="sumPass">...</span></div>
-          <div class="sum-row" id="sumReturnRow" style="display:none;"><span class="sum-label">Retour :</span> <span
-              class="sum-value" id="sumReturn">...</span></div>
-        </div>
-
-        <div class="modal-field">
-          <label class="modal-label">Votre nom complet</label>
-          <input type="text" id="leadName" class="modal-input" placeholder="Ex: Jean Dupont">
-        </div>
-        <div class="modal-field">
-          <label class="modal-label">Numéro de téléphone</label>
-          <input type="tel" id="leadPhone" class="modal-input" placeholder="06 44 03 19 31">
-        </div>
-
-        <button class="confirm-btn" id="confirmBtn" onclick="submitBooking()">Confirmer ma demande</button>
-      </div>
-
-      <!-- STEP 2: SUCCESS -->
-      <div class="success-screen" id="step2">
-        <div class="success-icon">✓</div>
-        <div class="success-title">Demande envoyée !</div>
-        <div class="success-sub">Sam a bien reçu votre demande. Un message de confirmation vous sera envoyé d'ici
-          quelques minutes.</div>
-        <div class="success-ref" id="bookingRef">SAM-XXXX</div>
-        <button class="confirm-btn" onclick="closeModal()">Fermer</button>
-      </div>
-    </div>
-  </div>
 
   <script>
     let currentType = 'private';
@@ -2469,10 +2396,6 @@
       document.getElementById('datetimeRow').style.display = val === 'custom' ? 'grid' : 'none';
     }
 
-    function toggleReturnFields(show) {
-      document.getElementById('returnRow').style.display = show ? 'grid' : 'none';
-    }
-
     function setType(type, btn) {
       currentType = type;
       const card = document.getElementById('bookingCard');
@@ -2512,18 +2435,6 @@
       document.getElementById('sumTo').textContent = document.getElementById('toInput').value || 'Non renseigné';
       document.getElementById('sumTime').textContent = getTimeLabel();
       document.getElementById('sumPass').textContent = pass + ' passager' + (pass > 1 ? 's' : '');
-
-      const tripType = document.querySelector('input[name="tripType"]:checked').value;
-      const sumReturnRow = document.getElementById('sumReturnRow');
-      if (tripType === 'aller-retour') {
-        sumReturnRow.style.display = 'flex';
-        const d = document.getElementById('returnDateInput').value;
-        const t = document.getElementById('returnTimeInput').value;
-        document.getElementById('sumReturn').textContent = (d && t) ? d + ' à ' + t : 'Non précisé';
-      } else {
-        sumReturnRow.style.display = 'none';
-      }
-
       if (currentType === 'medical') {
         modal.classList.add('medical-modal'); summary.classList.add('medical-sum');
         confirmBtn.classList.add('medical-btn'); sub.textContent = 'Transport médical · Vos coordonnées';
@@ -2546,129 +2457,21 @@
       const name = document.getElementById('leadName').value.trim();
       const phone = document.getElementById('leadPhone').value.trim();
       if (!name || !phone) { alert('Veuillez renseigner votre nom et téléphone.'); return; }
-
-      // Changement d'état UI
-      const confirmBtn = document.getElementById('confirmBtn');
-      confirmBtn.disabled = true;
-      confirmBtn.textContent = 'Envoi en cours...';
-
-      // Capture de la date et l'heure selon la sélection (Maintenant vs Custom)
-      let depDate = "";
-      let depTime = "";
-
-      if (selectedSlot === 'now') {
-        const d = new Date();
-        depDate = d.toLocaleDateString('fr-FR');
-        depTime = d.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
-      } else if (selectedSlot === '15') {
-        const d = new Date(Date.now() + 15 * 60000);
-        depDate = d.toLocaleDateString('fr-FR');
-        depTime = d.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
-      } else if (selectedSlot === '30') {
-        const d = new Date(Date.now() + 30 * 60000);
-        depDate = d.toLocaleDateString('fr-FR');
-        depTime = d.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
-      } else {
-        // Mode "Choisir horaire" : on récupère les valeurs des inputs
-        const dInput = document.getElementById('dateInput').value; // YYYY-MM-DD
-        const tInput = document.getElementById('timeInput').value; // HH:mm
-
-        if (dInput) {
-          const parts = dInput.split('-');
-          depDate = parts[2] + '/' + parts[1] + '/' + parts[0]; // Conversion en DD/MM/YYYY
-        }
-        depTime = tInput || "";
-      }
-
-      // Gestion du retour
-      const isRoundTrip = document.querySelector('input[name="tripType"]:checked').value === 'aller-retour';
-      let retDate = "";
-      let retTime = "";
-      if (isRoundTrip) {
-        const rdInput = document.getElementById('returnDateInput').value;
-        if (rdInput) {
-          const parts = rdInput.split('-');
-          retDate = parts[2] + '/' + parts[1] + '/' + parts[0];
-        }
-        retTime = document.getElementById('returnTimeInput').value || "";
-      }
-
-      // 16 champs parfaitement alignés pour le script
-      const formData = {
-        timestamp: new Date().toLocaleDateString('fr-FR') + ' ' + new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' }),
-        client_type: currentType, // 'private' ou 'medical'
-        client: name,
-        telephone: phone,
-        course_type: currentType === 'medical' ? 'Médical (CPAM)' : 'Privé/Business',
-        depart: document.getElementById('fromInput').value || "Non précisé",
-        destination: document.getElementById('toInput').value || "Non précisé",
-        date_depart: depDate,
-        heure_depart: depTime,
-        passagers: document.getElementById('passengersInput').value,
-        trajet_type: isRoundTrip ? 'aller-retour' : 'aller-simple',
-        retour_date: retDate,
-        retour_heure: retTime,
-        page_source: window.location.search || 'Direct',
-        email: document.getElementById('recurringEmail') ? document.getElementById('recurringEmail').value : 'N/A',
-        ref: 'SAM-' + Math.floor(1000 + Math.random() * 9000)
-      };
-
-      const WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbwxy3SoZYZUPAvO3LRSeFd1Qw5sPiVR0jCoW-3OHSO3hpL431cuHCXTEjzGIgkZ0Byl/exec';
-      const DISCORD_WEBHOOK = 'https://discord.com/api/webhooks/1479352396781195315/2jNGnrS5DiLKbhc05khc-yDW6KguoPotCI-84LCqAPIcnDXIUW0OQrrM5Dy1Bj0h07xP';
-
-      // Envoi vers Discord
-      const discordPayload = {
-        embeds: [{
-          title: "🚀 Nouveau Lead : " + formData.ref,
-          color: currentType === 'medical' ? 3447003 : 14856026, // Bleu pour médical, Or pour privé
-          fields: [
-            { name: "👤 Client", value: formData.client, inline: true },
-            { name: "📞 Téléphone", value: formData.telephone, inline: true },
-            { name: "🏢 Service", value: formData.course_type, inline: true },
-            { name: "📍 Départ", value: formData.depart },
-            { name: "🏁 Arrivée", value: formData.destination },
-            { name: "📅 Aller", value: formData.date_depart + " à " + formData.heure_depart, inline: true },
-            { name: "👥 Passagers", value: formData.passagers, inline: true },
-            { name: "🔄 Trajet", value: formData.trajet_type.toUpperCase(), inline: true }
-          ],
-          footer: { text: "Source: " + formData.page_source }
-        }]
-      };
-
-      if (isRoundTrip) {
-        discordPayload.embeds[0].fields.push({
-          name: "↩️ Retour Prévu",
-          value: formData.retour_date + " à " + formData.retour_heure
+      document.getElementById('progressFill').style.width = '100%';
+      setTimeout(() => {
+        document.getElementById('step1').style.display = 'none';
+        document.getElementById('step2').classList.add('show');
+        const ref = 'SAM-' + Math.floor(1000 + Math.random() * 9000);
+        document.getElementById('bookingRef').textContent = ref;
+        console.log('🚖 LEAD:', {
+          ref, name, phone, type: currentType,
+          from: document.getElementById('fromInput').value,
+          to: document.getElementById('toInput').value,
+          time: getTimeLabel(),
+          recurring: document.getElementById('recurringCheck') ? document.getElementById('recurringCheck').checked : false,
+          recurringEmail: document.getElementById('recurringEmail') ? document.getElementById('recurringEmail').value : '',
         });
-      }
-
-      // Envoi simultané
-      fetch(DISCORD_WEBHOOK, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(discordPayload)
-      }).catch(e => console.error("Discord Error:", e));
-
-      fetch(WEBHOOK_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        cache: 'no-cache',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData)
-      })
-        .then(() => {
-          document.getElementById('progressFill').style.width = '100%';
-          setTimeout(() => {
-            document.getElementById('step1').style.display = 'none';
-            document.getElementById('step2').classList.add('show');
-            document.getElementById('bookingRef').textContent = formData.ref;
-          }, 600);
-        })
-        .catch(err => {
-          console.error('Erreur Lead:', err);
-          document.getElementById('step1').style.display = 'none';
-          document.getElementById('step2').classList.add('show');
-        });
+      }, 600);
     }
 
     // Init date/time
@@ -2691,7 +2494,6 @@
       observer.observe(el);
     });
   </script>
-  <script src="seo-data.js"></script>
 </body>
 
 </html>

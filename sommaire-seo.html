@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard SEO - Sam Taxi (1480 Pages)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --gold: #e2b35a;
+            --dark: #0a0a0a;
+            --card: #151515;
+            --text: #ffffff;
+            --muted: #a0a0a0;
+        }
+
+        body {
+            font-family: 'Plus+Jakarta+Sans', sans-serif;
+            background-color: var(--dark);
+            color: var(--text);
+            margin: 0;
+            padding: 40px 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+            border-bottom: 1px solid rgba(226, 179, 90, 0.2);
+            padding-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            margin: 0;
+            background: linear-gradient(to right, #fff, var(--gold));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-value {
+            display: block;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--gold);
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 20px;
+        }
+
+        .section-card {
+            background: var(--card);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            padding: 24px;
+            transition: transform 0.3s ease;
+        }
+
+        .section-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(226, 179, 90, 0.3);
+        }
+
+        h2 {
+            color: var(--gold);
+            font-size: 1.2rem;
+            border-left: 4px solid var(--gold);
+            padding-left: 15px;
+            margin-top: 0;
+        }
+
+        .link-list {
+            height: 300px;
+            overflow-y: auto;
+            margin-top: 15px;
+            padding-right: 10px;
+        }
+
+        .link-list::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .link-list::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 10px;
+        }
+
+        a {
+            display: block;
+            color: var(--muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            padding: 6px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.02);
+            transition: color 0.2s;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        a:hover {
+            color: #fff;
+        }
+
+        .search-container {
+            margin-bottom: 30px;
+            position: sticky;
+            top: 20px;
+            z-index: 100;
+        }
+
+        #searchInput {
+            width: 100%;
+            padding: 15px 25px;
+            background: var(--card);
+            border: 1px solid var(--gold);
+            border-radius: 50px;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .footer-note {
+            text-align: center;
+            margin-top: 60px;
+            color: var(--muted);
+            font-size: 0.9rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            padding-top: 30px;
+        }
+
+        .contact-info {
+            color: var(--gold);
+            font-weight: 700;
+            margin-top: 10px;
+        }
+
+        .no-print {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .pdf-btn {
+            background: var(--gold);
+            color: black;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .pdf-btn:hover {
+            transform: scale(1.05);
+        }
+
+        @media print {
+
+            .no-print,
+            .search-container,
+            .link-list::-webkit-scrollbar {
+                display: none !important;
+            }
+
+            body {
+                background: white !important;
+                color: black !important;
+                padding: 0;
+            }
+
+            .section-card {
+                break-inside: avoid;
+                border: 1px solid #eee !important;
+                background: white !important;
+                color: black !important;
+                page-break-inside: avoid;
+            }
+
+            .link-list {
+                height: auto !important;
+                overflow: visible !important;
+            }
+
+            h1,
+            h2,
+            .stat-value {
+                color: black !important;
+                -webkit-text-fill-color: black !important;
+            }
+
+            a {
+                color: #555 !important;
+                border-bottom: 1px solid #eee !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Machine à Leads - Sam Taxi</h1>
+            <p>Sommaire technique de la stratégie SEO Programmatique</p>
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-value">1480</span>
+                    <span class="stat-label">Pages SEO Libérées</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">100%</span>
+                    <span class="stat-label">Dynamique</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-value">Var/PACA</span>
+                    <span class="stat-label">Couverture Totale</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Rechercher une ville, un aéroport ou un service..."
+                onkeyup="filterLinks()">
+        </div>
+
+        <div class="no-print">
+            <button class="pdf-btn" onclick="window.print()">📥 Générer le rapport (PDF / Imprimer)</button>
+        </div>
+
+        <div class="grid" id="main-grid">
+            <!-- Injecté par JS -->
+        </div>
+
+        <div class="footer-note">
+            Document généré pour présentation client. Tous les liens pointent vers le domaine final de production.
+        </div>
+    </div>
+
+    <script>
+        const baseUrl = "https://sam-taxi.fr/index.html?p=";
+
+        async function loadLinks() {
+            try {
+                const response = await fetch('seo-data-master.json');
+                const data = await response.json();
+                const grid = document.getElementById('main-grid');
+
+                // Groupement par catégories
+                const categories = {
+                    "Liaisons Inter-Hubs (Aéroports/Gares)": [],
+                    "Navettes Aéroport VIP": [],
+                    "Longue Distance Haute Valeur": [],
+                    "Transport Médical (CPAM)": [],
+                    "Services Premium par Ville": []
+                };
+
+                Object.keys(data).forEach(slug => {
+                    const item = data[slug];
+                    const link = `<a href="${baseUrl}${slug}" target="_blank" class="seo-link">${item.title}</a>`;
+
+                    if (slug.startsWith('transfert-aeroport') || slug.startsWith('transfert-gare')) {
+                        categories["Liaisons Inter-Hubs (Aéroports/Gares)"].push(link);
+                    } else if (slug.includes('navette-aeroport')) {
+                        categories["Navettes Aéroport VIP"].push(link);
+                    } else if (slug.includes('vers-')) {
+                        categories["Longue Distance Haute Valeur"].push(link);
+                    } else if (slug.includes('medical')) {
+                        categories["Transport Médical (CPAM)"].push(link);
+                    } else {
+                        categories["Services Premium par Ville"].push(link);
+                    }
+                });
+
+                // Génération des cartes
+                Object.keys(categories).forEach(catName => {
+                    const card = document.createElement('div');
+                    card.className = "section-card";
+                    card.innerHTML = `
+                        <h2>${catName} (${categories[catName].length})</h2>
+                        <div class="link-list">
+                            ${categories[catName].join('')}
+                        </div>
+                    `;
+                    grid.appendChild(card);
+                });
+
+            } catch (e) {
+                console.error("Erreur:", e);
+                document.body.innerHTML += "<h1 style='color:red'>Erreur de chargement du fichier JSON local. Vérifiez que seo-data-master.json est présent.</h1>";
+            }
+        }
+
+        function filterLinks() {
+            const input = document.getElementById('searchInput');
+            const filter = input.value.toLowerCase();
+            const links = document.querySelectorAll('.seo-link');
+
+            links.forEach(link => {
+                const text = link.textContent.toLowerCase();
+                // On utilise display = "" pour laisser le style par défaut (block) ou none
+                link.style.display = text.includes(filter) ? "" : "none";
+            });
+
+            // Masquer les sections vides
+            document.querySelectorAll('.section-card').forEach(card => {
+                const allLinks = Array.from(card.querySelectorAll('.seo-link'));
+                const visibleLinks = allLinks.filter(l => l.style.display !== 'none').length;
+                card.style.display = (visibleLinks > 0) ? "block" : "none";
+            });
+        }
+
+        loadLinks();
+    </script>
+</body>
+
+</html>
