@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogue Destinations & Tarifs — Sam Taxi</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@400;500;700&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --dark: #111111;
+            --card: #161616;
+            --border: rgba(255, 255, 255, 0.08);
+            --gold: #F5C842;
+            --gold-dim: rgba(245, 200, 66, 0.15);
+            --blue: #3b82f6;
+            --blue-dim: rgba(59, 130, 246, 0.15);
+            --text: #f0f0f0;
+            --muted: #888;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: var(--black);
+            color: var(--text);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .logo span {
+            color: var(--gold);
+        }
+
+        .phone {
+            color: var(--muted);
+            font-size: 14px;
+        }
+
+        h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        /* --- CONTROLES (Recherche & Filtres) --- */
+        .controls {
+            background: var(--card);
+            padding: 20px;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            margin-bottom: 30px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 16px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            font-family: 'DM Sans', sans-serif;
+            outline: none;
+            margin-bottom: 15px;
+            transition: border-color 0.2s;
+        }
+
+        .search-box:focus {
+            border-color: var(--gold);
+        }
+
+        .filters {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            background: transparent;
+            color: var(--muted);
+            border: 1px solid var(--border);
+            padding: 8px 16px;
+            border-radius: 100px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            background: var(--gold-dim);
+            color: var(--gold);
+            border-color: var(--gold);
+        }
+
+        .filter-btn[data-cat="medical"].active {
+            background: var(--blue-dim);
+            color: var(--blue);
+            border-color: var(--blue);
+        }
+
+        .stats {
+            margin-top: 15px;
+            font-size: 13px;
+            color: var(--muted);
+            text-align: right;
+        }
+
+        /* --- RESULTATS --- */
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 16px;
+        }
+
+        .card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 20px;
+            text-decoration: none;
+            color: var(--text);
+            transition: transform 0.2s, border-color 0.2s;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(245, 200, 66, 0.4);
+        }
+
+        .card.type-medical:hover {
+            border-color: rgba(59, 130, 246, 0.4);
+        }
+
+        .c-tag {
+            align-self: flex-start;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 100px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .type-prive .c-tag {
+            background: var(--gold-dim);
+            color: var(--gold);
+        }
+
+        .type-medical .c-tag {
+            background: var(--blue-dim);
+            color: var(--blue);
+        }
+
+        .type-aeroport .c-tag {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+
+        .c-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .c-desc {
+            font-size: 13px;
+            color: var(--muted);
+            margin-top: auto;
+        }
+
+        #loader {
+            text-align: center;
+            padding: 40px;
+            color: var(--gold);
+            font-family: 'Syne', sans-serif;
+            font-size: 18px;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+
+            100% {
+                opacity: 0.5;
+            }
+        }
+
+        /* --- PRINT CSS (POUR EXPORT PDF) --- */
+        @media print {
+            body {
+                background: white;
+                color: black;
+                font-size: 12px;
+            }
+
+            .controls,
+            #loader {
+                display: none !important;
+            }
+
+            .logo {
+                color: black;
+            }
+
+            .logo span {
+                color: black;
+            }
+
+            header {
+                border-bottom: 2px solid #eee;
+                padding-bottom: 20px;
+            }
+
+            .results-grid {
+                display: block;
+            }
+
+            .card {
+                background: none;
+                border: none;
+                border-bottom: 1px solid #ccc;
+                border-radius: 0;
+                padding: 12px 0;
+                page-break-inside: avoid;
+                flex-direction: row;
+                align-items: center;
+                gap: 15px;
+            }
+
+            .c-tag {
+                border: 1px solid #000;
+                color: #000 !important;
+                background: transparent !important;
+                flex-shrink: 0;
+            }
+
+            .c-title {
+                font-size: 14px;
+                margin: 0;
+            }
+
+            .c-desc {
+                display: none;
+            }
+
+            .container {
+                padding: 0;
+                max-width: 100%;
+            }
+
+            /* Add a pseudo-element to show URL on print if needed, or keep it clean */
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+        <header>
+            <div class="logo">SAM<span>.</span>TAXI</div>
+            <div class="phone">📞 Réservez 24h/24 au 06 44 03 19 31</div>
+            <h1>Destinations & Services</h1>
+            <p style="color:var(--muted); font-size:14px;">Catalogue complet de nos zones de prise en charge et trajets
+            </p>
+        </header>
+
+        <div class="controls">
+            <input type="text" id="searchInput" class="search-box"
+                placeholder="Rechercher une ville, un aéroport ou une destination... (ex: Toulon, Nice)">
+            <div class="filters">
+                <button class="filter-btn active" data-cat="all">Tous les trajets</button>
+                <button class="filter-btn" data-cat="medical">🏥 Médical (CPAM)</button>
+                <button class="filter-btn" data-cat="prive">🚗 Privé / VTC</button>
+                <button class="filter-btn" data-cat="aeroport">✈️ Aéroports & Gares</button>
+            </div>
+            <div class="stats" id="statsDisplay">Chargement des données...</div>
+        </div>
+
+        <div id="loader">Chargement du catalogue (10 000+ liaisons)...</div>
+        <div class="results-grid" id="resultsGrid">
+            <!-- Rendu JS -->
+        </div>
+    </div>
+
+    <script>
+        let allDestinations = [];
+        let filteredDestinations = [];
+        const maxResults = 100; // Limite d'affichage web pour ne pas faire lagger le navigateur
+        let currentCategory = 'all';
+
+        // Elements
+        const grid = document.getElementById('resultsGrid');
+        const searchInput = document.getElementById('searchInput');
+        const statsDisplay = document.getElementById('statsDisplay');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const loader = document.getElementById('loader');
+
+        // Charger les données
+        fetch('seo-data-master.json')
+            .then(res => res.json())
+            .then(data => {
+                // Transformer l'objet en tableau
+                allDestinations = Object.keys(data).map(slug => {
+                    const item = data[slug];
+
+                    // Déduire la catégorie
+                    let category = 'prive';
+                    if (slug.includes('medical')) category = 'medical';
+                    else if (slug.includes('transfert') || slug.includes('aeroport') || slug.includes('gare')) category = 'aeroport';
+
+                    // Tag visuel
+                    let tagText = category === 'medical' ? 'Médical' : category === 'aeroport' ? 'Transfert' : 'Privé';
+
+                    return {
+                        slug: slug,
+                        title: item.title,
+                        desc: item.metaDesc,
+                        category: category,
+                        tagText: tagText,
+                        searchStr: `${item.title} ${slug}`.toLowerCase()
+                    };
+                });
+
+                loader.style.display = 'none';
+                applyFilters();
+            })
+            .catch(err => {
+                loader.textContent = "Erreur de chargement. Vérifiez que le fichier seo-data-master.json est bien en ligne.";
+                console.error(err);
+            });
+
+        function applyFilters() {
+            const query = searchInput.value.toLowerCase().trim();
+
+            filteredDestinations = allDestinations.filter(item => {
+                const matchSearch = query === '' || item.searchStr.includes(query);
+                const matchCat = currentCategory === 'all' || item.category === currentCategory;
+                return matchSearch && matchCat;
+            });
+
+            renderGrid();
+        }
+
+        function renderGrid() {
+            grid.innerHTML = '';
+
+            // Afficher max X résultats pour la perf web
+            const toShow = filteredDestinations.slice(0, maxResults);
+
+            toShow.forEach(item => {
+                const card = document.createElement('a');
+                card.href = `index.html?p=${item.slug}`;
+                card.className = `card type-${item.category}`;
+                card.target = "_blank";
+
+                card.innerHTML = `
+                <div class="c-tag">${item.tagText}</div>
+                <div class="c-title">${item.title.replace('— Sam Taxi Service', '').replace('— Longue Distance Premium', '')}</div>
+                <div class="c-desc">${item.desc.substring(0, 90)}...</div>
+            `;
+                grid.appendChild(card);
+            });
+
+            const hiddenCount = filteredDestinations.length - toShow.length;
+            if (hiddenCount > 0) {
+                statsDisplay.innerHTML = `Affichage de <b>${toShow.length}</b> résultats sur <b>${filteredDestinations.length}</b> correspondances. <i>Affinez la recherche pour voir le reste.</i>`;
+            } else {
+                statsDisplay.innerHTML = `<b>${filteredDestinations.length}</b> résultats trouvés.`;
+            }
+        }
+
+        // Events
+        searchInput.addEventListener('input', applyFilters);
+
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                filterBtns.forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                currentCategory = e.target.getAttribute('data-cat');
+                applyFilters();
+            });
+        });
+
+    </script>
+
+</body>
+
+</html>
