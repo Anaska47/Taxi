@@ -38,6 +38,17 @@ async function initDynamicSEO() {
     // --- MISE À JOUR DU DOM ---
     document.title = data.title;
 
+    // Suivi GA4 de la page virtuelle générée
+    try {
+        if (typeof gtag === 'function') {
+            gtag('event', 'page_view', {
+                page_title: data.title,
+                page_location: window.location.href,
+                page_path: window.location.pathname + window.location.search
+            });
+        }
+    } catch (e) { }
+
     let metaDesc = document.querySelector('meta[name="description"]');
     if (!metaDesc) {
         metaDesc = document.createElement('meta');
