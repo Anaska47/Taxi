@@ -2655,11 +2655,20 @@
         discordEmbed.fields.push({ name: 'Email (Voyage recurrent)', value: formData.email, inline: false });
       }
 
+      // Liens Google Maps itinéraire Départ -> Arrivée
+      const mapsOrigin = encodeURIComponent(formData.depart);
+      const mapsDest = encodeURIComponent(formData.destination);
+      const mapsUrl = 'https://www.google.com/maps/dir/?api=1&origin=' + mapsOrigin + '&destination=' + mapsDest + '&travelmode=driving';
+
+      // Lien Google Maps arrivée seule (pour naviguer directement)
+      const mapsDestOnly = 'https://www.google.com/maps/search/?api=1&query=' + mapsDest;
+
       const discordPayload = {
-        content: '**Nouvelle reservation Sam Taxi!**\n' +
-          'Appeler le client: ' + phoneClean + '\n' +
-          'WhatsApp Client: https://wa.me/' + phoneClean.replace('+','') + '?text=' + waText + '\n' +
-          'Partager ce lead: https://wa.me/?text=' + waText,
+        content: '## 🚨 Nouveau Lead Sam Taxi\n' +
+          '📞 **' + phoneClean + '** (appeler: tel:' + phoneClean + ')\n' +
+          '[🗺️ Voir l\'itinéraire complet](' + mapsUrl + ')  ·  ' +
+          '[📍 Naviguer vers l\'arrivée](' + mapsDestOnly + ')  ·  ' +
+          '[📤 Partager ce lead](https://wa.me/?text=' + waText + ')',
         embeds: [discordEmbed]
       };
 
