@@ -1,4 +1,4 @@
-const fs = require('fs');
+import fs from 'fs';
 
 const cities = [
     // VAR (83)
@@ -78,19 +78,22 @@ cities.forEach(city => {
     });
 });
 
-// 2. High Ticket : Ville x Destinations Nationales/Internationales
+// 2. High Ticket : Ville x Destinations Nationales/Internationales x Services
 cities.forEach(city => {
     highTicketDestinations.forEach(dest => {
-        const slug = `taxi-${city.toLowerCase()}-vers-${dest.slug}`;
-        seoData[slug] = {
-            title: `Taxi ${city} vers ${dest.name} — Longue Distance Premium`,
-            metaDesc: `Trajet haute qualité entre ${city} et ${dest.name}. Confort berline, bouteille d'eau, chargeurs et discrétion totale.`,
-            h1: `De ${city}<br>vers <em>${dest.name}</em>`,
-            heroSub: `Spécialiste des trajets longue distance. Voyagez en première classe sur toute la France et l'Europe.`,
-            city: city,
-            destination: dest.name
-        };
-        sitemap.push(`${baseUrl}?p=${slug}`);
+        services.forEach(service => {
+            const slug = `taxi-${service.slug}-${city.toLowerCase().replace(/ /g, '-')}-vers-${dest.slug}`;
+            seoData[slug] = {
+                title: `${service.name} ${city} vers ${dest.name} — Longue Distance Premium`,
+                metaDesc: `Trajet ${service.name.toLowerCase()} entre ${city} et ${dest.name}. Ponctualité, confort berline et discrétion totale garantis.`,
+                h1: `${service.name} de ${city}<br>vers <em>${dest.name}</em>`,
+                heroSub: `Spécialiste des trajets longue distance premium. Voyagez en première classe sur toute la France et l'Europe.`,
+                city: city,
+                destination: dest.name,
+                service: service.slug === "medical" ? "Médical" : "Privé"
+            };
+            sitemap.push(`${baseUrl}?p=${slug}`);
+        });
     });
 });
 
@@ -111,8 +114,53 @@ hubs.forEach(start => {
     });
 });
 
-// Sauvegarde du JSON
-fs.writeFileSync('seo-data-master.json', JSON.stringify(seoData, null, 2));
+// 4. Hubs ↔ Villes (Aller-Retour)
+hubs.forEach(hub => {
+    cities.forEach(city => {
+        // Sens : Hub vers Ville
+        const slugHubToCity = `transfert-${hub.slug}-vers-${city.toLowerCase().replace(/ /g, '-')}`;
+        seoData[slugHubToCity] = {
+            title: `Transfert ${hub.name} vers ${city} — Chauffeur Privé`,
+            metaDesc: `Réservez votre transfert depuis ${hub.name} vers ${city}. Chauffeur privé à votre arrivée avec pancarte nominative. Prix fixe.`,
+            h1: `Transfert de ${hub.name}<br>vers <em>${city}</em>`,
+            heroSub: `Liaison directe avec accueil personnalisé à l'arrivée. Ne perdez plus de temps dans les files d'attente.`,
+            city: city
+        };
+        sitemap.push(`${baseUrl}?p=${slugHubToCity}`);
+
+        // Sens : Ville vers Hub
+        const slugCityToHub = `transfert-${city.toLowerCase().replace(/ /g, '-')}-vers-${hub.slug}`;
+        seoData[slugCityToHub] = {
+            title: `Transfert Taxi ${city} vers ${hub.name} — Ponctualité Garantie`,
+            metaDesc: `Trajet serein en taxi premium depuis ${city} vers ${hub.name}. Arrivez à l'heure pour votre vol ou votre train. Bouteille d'eau à bord.`,
+            h1: `Transfert de ${city}<br>vers <em>${hub.name}</em>`,
+            heroSub: `Votre départ en toute sérénité. Ponctualité garantie pour ne jamais manquer votre correspondance.`,
+            city: city
+        };
+        sitemap.push(`${baseUrl}?p=${slugCityToHub}`);
+    });
+});
+
+// 5. Inter-Villes PACA / Régional
+cities.forEach(cityStart => {
+    cities.forEach(cityEnd => {
+        if (cityStart !== cityEnd) {
+            const slug = `taxi-${cityStart.toLowerCase().replace(/ /g, '-')}-vers-${cityEnd.toLowerCase().replace(/ /g, '-')}`;
+            seoData[slug] = {
+                title: `Taxi Privé de ${cityStart} vers ${cityEnd} — Réservez`,
+                metaDesc: `Liaison rapide et confortable en taxi entre ${cityStart} et ${cityEnd}. Voyagez dans une berline premium avec chauffeur courtois.`,
+                h1: `Trajet de ${cityStart}<br>vers <em>${cityEnd}</em>`,
+                heroSub: `Votre connexion directe régionale. Un confort inégalé pour vos déplacements d'affaires ou personnels.`,
+                city: cityStart,
+                destination: cityEnd
+            };
+            sitemap.push(`${baseUrl}?p=${slug}`);
+        }
+    });
+});
+
+// Modifie les chemins de sortie pour s'assurer qu'ils aillent directement dans le dossier public
+fs.writeFileSync('public/seo-data-master.json', JSON.stringify(seoData, null, 2));
 
 // Génération du Sitemap XML
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
@@ -120,6 +168,6 @@ const xml = `<?xml version="1.0" encoding="UTF-8"?>
 ${sitemap.map(url => `  <url><loc>${url}</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>`).join('\n')}
 </urlset>`;
 
-fs.writeFileSync('sitemap.xml', xml);
+fs.writeFileSync('public/sitemap.xml', xml);
 
 console.log(`✅ Génération terminée : ${sitemap.length} pages créées.`);
