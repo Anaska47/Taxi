@@ -2469,17 +2469,25 @@
 
       navigator.geolocation.getCurrentPosition(async (position) => {
         try {
-          const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${position.coords.latitude}&lon=${position.coords.longitude}`);
+          // Utilisation d'un timeout sur le fetch également
+          const controller = new AbortController();
+          const timeoutId = setTimeout(() => controller.abort(), 8000);
+
+          const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${position.coords.latitude}&lon=${position.coords.longitude}`, { signal: controller.signal });
+          clearTimeout(timeoutId);
+
           const data = await res.json();
           if (data && data.display_name) {
-            // Simplify address for taxi usage (usually first parts of the name)
             const parts = data.display_name.split(',');
+            // On prend les 3 premières parties (rue, quartier/ville, cp/ville)
             const shortAddr = parts.slice(0, 3).join(',').trim();
             input.value = shortAddr;
+          } else {
+            alert("Position trouvée, mais adresse introuvable.");
           }
         } catch (err) {
           console.error(err);
-          alert("Erreur lors de la récupération de l'adresse.");
+          alert("Erreur réseau lors de la récupération de l'adresse.");
         } finally {
           btn.classList.remove('loading');
           btn.innerHTML = '🎯';
@@ -2488,9 +2496,15 @@
         btn.classList.remove('loading');
         btn.innerHTML = '🎯';
         let msg = "Impossible de récupérer votre position.";
-        if (err.code === 1) msg = "Veuillez autoriser l'accès à votre position dans votre navigateur.";
+        if (err.code === 1) msg = "Accès refusé. Veuillez autoriser la géolocalisation dans vos réglages.";
+        if (err.code === 2) msg = "Position indisponible. Vérifiez votre connexion ou votre signal GPS.";
+        if (err.code === 3) msg = "Délai d'attente dépassé. Réessayez en vous déplaçant légèrement.";
         alert(msg);
-      }, { enableHighAccuracy: true, timeout: 5000 });
+      }, {
+        enableHighAccuracy: true,
+        timeout: 10000, // 10 secondes pour le GPS
+        maximumAge: 60000 // Autorise une position mise en cache d'une minute
+      });
     }
 
     // ── SMART SUGGESTIONS ──
