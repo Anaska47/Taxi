@@ -4,10 +4,10 @@ let SEO_DATA_MASTER = {};
 // On garde quelques pages clés en dur pour le chargement instantané
 const SEO_STATIC = {
     "default": {
-        "title": "Sam Taxi — Réservez en 30 secondes",
-        "metaDesc": "Réservez votre taxi dans le Var en 30 secondes. Transport privé ou médical certifié 24h/24 et 7j/7.",
-        "h1": "Votre taxi,<br><em>là où vous en avez besoin.</em>",
-        "heroSub": "Réservez en 30 secondes. Transport privé ou médical — simple, rapide, fiable.",
+        "title": "Sam Taxi Var — Réservez votre trajet en 30 secondes",
+        "metaDesc": "Réservez votre taxi dans le Var (Brignoles, Nans-les-Pins, Carcès). Transport privé ou médical certifié 24h/24 et 7j/7.",
+        "h1": "Votre taxi dans le Var,<br><em>là où vous en avez besoin.</em>",
+        "heroSub": "Réservez en 30 secondes partout dans le Var et en Provence. Simple, rapide, fiable.",
         "city": ""
     }
 };
