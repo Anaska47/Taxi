@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
   <title>Sam Taxi — Réservez en 30 secondes</title>
   <meta name="description"
-    content="Réservez votre taxi à Toulon et dans le Var. Transport privé et médical conventionné CPAM disponible 24h/24 et 7j/7.">
+    content="Réservez votre taxi dans le Var. Transport privé et médical conventionné CPAM disponible 24h/24 et 7j/7.">
   <meta property="og:title" content="Sam Taxi — Votre chauffeur privé & médical dans le Var">
   <meta property="og:description"
     content="Réservez votre taxi en 30 secondes. Transferts aéroports, gares et transport médical conventionné.">
@@ -1966,7 +1966,10 @@
 
           <div class="field-row">
             <div class="field-icon">🏨</div>
-            <input type="text" id="hospitalInput" placeholder="Nom de l'établissement de santé">
+            <input type="text" id="hospitalInput" placeholder="Nom de l'établissement de santé" autocomplete="off"
+              oninput="showSuggestions('hospitalSug', this.value)" onblur="hideSug('hospitalSug')"
+              onfocus="showSuggestions('hospitalSug', this.value)">
+            <div class="suggestions" id="hospitalSug"></div>
           </div>
 
           <div style="font-size:12px;color:var(--muted);margin:4px 0;">Type de transport :</div>
@@ -2178,7 +2181,7 @@
 
     <div class="car-single-display fade-up" style="max-width: 900px; margin: 0 auto; padding: 0 20px;">
       <div class="car-photo" style="border-radius: 24px; box-shadow: 0 20px 50px rgba(0,0,0,0.5);">
-        <img src="audi-a4-sam-taxi.png" alt="Audi A4 Break Sam Taxi Toulon"
+        <img src="audi-a4-sam-taxi.png" alt="Audi A4 Break Sam Taxi Var"
           style="aspect-ratio: 16/9; width: 100%; object-fit: cover;">
         <div class="car-photo-overlay"
           style="opacity: 1; background: linear-gradient(to top, rgba(0,0,0,0.4) 0%, transparent 40%);">
@@ -2212,7 +2215,7 @@
       <div class="car-badge">
         <div class="car-badge-icon">📍</div>
         <div>
-          <div class="car-badge-text">Taxi Toulon</div>
+          <div class="car-badge-text">Taxi Var</div>
           <div class="car-badge-sub">Agréé & assuré</div>
         </div>
       </div>
@@ -2297,7 +2300,7 @@
     <div class="car-cinematic-content">
       <div class="car-cinematic-tag">Votre véhicule</div>
       <div class="car-cinematic-title">Audi A4 Break</div>
-      <div class="car-cinematic-sub">Confort berline · Coffre XXL · Climatisation · Agrément Taxi Toulon</div>
+      <div class="car-cinematic-sub">Confort berline · Coffre XXL · Climatisation · Agrément Taxi Var</div>
       <a href="tel:+33644031931" class="car-cinematic-cta">📞 Réserver ce véhicule</a>
     </div>
   </div>
@@ -2305,14 +2308,10 @@
   <!-- FOOTER -->
   <footer>
     <div class="footer-logo">SAM<span>.</span>TAXI</div>
-    <p>Votre partenaire de mobilité — Disponible 24h/24, 7j/7 · Taxi Toulon</p>
+    <p>Votre partenaire de mobilité — Disponible 24h/24, 7j/7 · Taxi Var</p>
     <p style="margin-top:8px;">📞 06 44 03 19 31 &nbsp;·&nbsp; 📧 sam.taxi.83100@gmail.com</p>
     <div class="footer-legal">
-      <span>🏛️ Commune de rattachement : <strong>Toulon</strong></span>
-      <span class="footer-sep">·</span>
-      <span>ADS N° <strong>19</strong></span>
-      <span class="footer-sep">·</span>
-      <span>Var (83)</span>
+      <span>Toulon ADS N° <strong>19</strong></span>
     </div>
     <p style="margin-top:16px;font-size:11px;">© 2025 Sam Taxi — Tous droits réservés</p>
   </footer>
@@ -2378,7 +2377,7 @@
       'réserver': 'Super ! Remplissez le formulaire en haut de la page, ou appelez le 06 44 03 19 31. Confirmation en moins de 2 min ✅',
       'tarif': 'Les tarifs dépendent de la distance. Appelez le 06 44 03 19 31 pour un devis gratuit 📞',
       'médical': 'Transport médical (dialyse, chimio, CPAM) disponible 7j/7. Sélectionnez "Transport Médical" dans le formulaire 🏥',
-      'aéroport': 'Transferts disponibles : Toulon-Hyères, Nice, Marseille. Réservez à l\'avance 🛫',
+      'aéroport': 'Transferts disponibles : Hyères, Nice, Marseille. Réservez à l\'avance 🛫',
       'heure': 'Disponible 24h/24, 7j/7, y compris les jours fériés 🕐',
       'default': 'Merci ! Pour une réponse rapide, appelez le 06 44 03 19 31 ou réservez via le formulaire 😊'
     };
@@ -2422,16 +2421,14 @@
 
     // ── SMART SUGGESTIONS ──
     const PLACES = [
-      { name: 'Aéroport Toulon-Hyères', detail: 'TLN — Terminal passagers', icon: '✈️', badge: 'Populaire' },
       { name: 'Aéroport Nice Côte d\'Azur', detail: 'NCE — Terminal 1 & 2', icon: '✈️', badge: 'Populaire' },
       { name: 'Aéroport Marseille-Provence', detail: 'MRS — Hall 1 & 2', icon: '✈️', badge: 'Populaire' },
-      { name: 'Gare de Toulon', detail: 'Place de l\'Europe, Toulon', icon: '🚄', badge: null },
+      { name: 'Gare d\'Aix-en-Provence TGV', detail: 'Plateau de l\'Arbois', icon: '🚄', badge: 'Populaire' },
       { name: 'Gare de Marseille-Saint-Charles', detail: 'Place Victor Hugo', icon: '🚄', badge: null },
-      { name: 'Hôpital Sainte-Musse', detail: 'Toulon — CHU principal', icon: '🏥', badge: 'Médical' },
-      { name: 'Centre de Dialyse Toulon', detail: 'Service de néphrologie', icon: '🏥', badge: 'Médical' },
+      { name: 'Hôpital de Brignoles', detail: 'Jean-Marcel — Centre Hospitalier', icon: '🏥', badge: 'Médical' },
       { name: 'Institut Paoli-Calmettes', detail: 'Marseille — Oncologie', icon: '🏥', badge: 'Médical' },
-      { name: 'Hyères Centre', detail: 'Place Georges Clemenceau', icon: '📍', badge: null },
-      { name: 'La Seyne-sur-Mer', detail: 'Place de la République', icon: '📍', badge: null },
+      { name: 'Nans-les-Pins', detail: 'Var — Centre-ville', icon: '📍', badge: null },
+      { name: 'Carcès', detail: 'Var — Centre-ville', icon: '📍', badge: null },
     ];
 
     function showSuggestions(id, val) {
@@ -2453,7 +2450,8 @@
     }
 
     function selectSug(boxId, name) {
-      document.getElementById(boxId === 'fromSug' ? 'fromInput' : 'toInput').value = name;
+      const inputId = boxId.replace('Sug', 'Input');
+      document.getElementById(inputId).value = name;
       document.getElementById(boxId).classList.remove('show');
     }
 

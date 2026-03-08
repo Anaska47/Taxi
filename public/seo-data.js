@@ -5,10 +5,10 @@ let SEO_DATA_MASTER = {};
 const SEO_STATIC = {
     "default": {
         "title": "Sam Taxi — Réservez en 30 secondes",
-        "metaDesc": "Réservez votre taxi à Toulon et dans le Var en 30 secondes. Transport privé ou médical certifié 24h/24 et 7j/7.",
+        "metaDesc": "Réservez votre taxi dans le Var en 30 secondes. Transport privé ou médical certifié 24h/24 et 7j/7.",
         "h1": "Votre taxi,<br><em>là où vous en avez besoin.</em>",
         "heroSub": "Réservez en 30 secondes. Transport privé ou médical — simple, rapide, fiable.",
-        "city": "Toulon"
+        "city": ""
     }
 };
 
@@ -92,16 +92,16 @@ async function initDynamicSEO() {
         "description": data.metaDesc,
         "provider": {
             "@type": "LocalBusiness",
-            "name": "Sam Taxi " + (data.city || "Toulon"),
+            "name": "Sam Taxi " + (data.city || "Var"),
             "address": {
                 "@type": "PostalAddress",
-                "addressLocality": data.city || "Toulon",
+                "addressLocality": data.city || "Var",
                 "addressRegion": "Var",
                 "addressCountry": "FR"
             },
             "telephone": "+33644031931"
         },
-        "areaServed": data.city || "Toulon"
+        "areaServed": data.city || "Var"
     };
     const scriptLd = document.getElementById('seo-ld');
     if (scriptLd) scriptLd.textContent = JSON.stringify(ldJson);

@@ -2,7 +2,7 @@ import fs from 'fs';
 
 const cities = [
     // VAR (83)
-    "Brignoles", "Toulon", "Hyères", "Fréjus", "Saint-Raphaël", "Draguignan", "Six-Fours-les-Plages", "La Seyne-sur-Mer", "Saint-Tropez", "Sainte-Maxime",
+    "Brignoles", "Nans-les-Pins", "Carcès", "Fréjus", "Saint-Raphaël", "Draguignan", "Saint-Tropez", "Sainte-Maxime",
     "Cogolin", "Le Muy", "Vidauban", "Le Luc", "Lorgues", "Garéoult", "Saint-Maximin-la-Sainte-Baume", "Rocbaron", "Tourves", "Le Val", "Cotignac", "Barjols",
 
     // ALPES-MARITIMES (06)
@@ -33,8 +33,6 @@ const highTicketDestinations = [
     { name: "Toulouse", slug: "toulouse" },
     { name: "Gap / Hautes-Alpes", slug: "gap" },
     { name: "Briançon / Serre-Chevalier", slug: "briancon" },
-    { name: "Port de Marseille (Croisières)", slug: "croisiere-marseille" },
-    { name: "Port de Toulon (Corsica Ferries)", slug: "port-toulon" },
     { name: "Station de Ski Isola 2000", slug: "isola-2000" },
     { name: "Station de Ski Valberg", slug: "valberg" }
 ];
@@ -42,12 +40,10 @@ const highTicketDestinations = [
 const hubs = [
     { name: "Aéroport Marseille-Provence", slug: "aeroport-marseille" },
     { name: "Aéroport Nice Côte d'Azur", slug: "aeroport-nice" },
-    { name: "Aéroport Toulon-Hyères", slug: "aeroport-toulon" },
     { name: "Gare Aix-en-Provence TGV", slug: "gare-aix-tgv" },
     { name: "Gare de Marseille Saint-Charles", slug: "gare-marseille" },
     { name: "Gare de Nice-Ville", slug: "gare-nice" },
     { name: "Gare d'Avignon TGV", slug: "gare-avignon-tgv" },
-    { name: "Gare de Toulon", slug: "gare-toulon" },
     { name: "Héliport de Monaco", slug: "heliport-monaco" }
 ];
 
