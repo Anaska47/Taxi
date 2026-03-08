@@ -256,7 +256,6 @@
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: 24px;
-      overflow: hidden;
       position: relative;
     }
 
@@ -295,7 +294,6 @@
       border: 1.5px solid var(--border);
       border-radius: 14px;
       transition: border-color .2s, background .2s;
-      overflow: hidden;
     }
 
     .field-row:focus-within {
@@ -357,19 +355,55 @@
       border-radius: 50%;
     }
 
+    /* ── GEOLOCATION ── */
+    .geo-btn {
+      background: none;
+      border: none;
+      color: var(--gold);
+      padding: 0 14px;
+      cursor: pointer;
+      font-size: 18px;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .geo-btn:hover {
+      color: var(--white);
+      transform: scale(1.1);
+    }
+
+    .geo-btn.loading {
+      animation: rotate 1s linear infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes rotate {
+      from {
+        transform: rotate(0deg);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
     /* ── SMART SUGGESTIONS ── */
     .suggestions {
       position: absolute;
       top: 100%;
       left: 0;
       right: 0;
-      z-index: 50;
+      z-index: 999;
       background: #1a1a1a;
       border: 1px solid var(--border);
       border-top: none;
       border-radius: 0 0 14px 14px;
       display: none;
       overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
 
     .suggestions.show {
@@ -1894,6 +1928,7 @@
             <input type="text" id="fromInput" placeholder="Adresse de départ" autocomplete="off"
               oninput="showSuggestions('fromSug', this.value)" onblur="hideSug('fromSug')"
               onfocus="showSuggestions('fromSug', this.value)">
+            <button class="geo-btn" title="Ma position actuelle" onclick="locateMe()">🎯</button>
             <div class="suggestions" id="fromSug"></div>
           </div>
 
@@ -2419,16 +2454,61 @@
       appendMsg(reply, 'in');
     }
 
+    // ── GEOLOCATION ──
+    async function locateMe() {
+      const btn = document.querySelector('.geo-btn');
+      const input = document.getElementById('fromInput');
+
+      if (!navigator.geolocation) {
+        alert("La géolocalisation n'est pas supportée par votre navigateur.");
+        return;
+      }
+
+      btn.classList.add('loading');
+      btn.innerHTML = '⌛';
+
+      navigator.geolocation.getCurrentPosition(async (position) => {
+        try {
+          const res = await fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${position.coords.latitude}&lon=${position.coords.longitude}`);
+          const data = await res.json();
+          if (data && data.display_name) {
+            // Simplify address for taxi usage (usually first parts of the name)
+            const parts = data.display_name.split(',');
+            const shortAddr = parts.slice(0, 3).join(',').trim();
+            input.value = shortAddr;
+          }
+        } catch (err) {
+          console.error(err);
+          alert("Erreur lors de la récupération de l'adresse.");
+        } finally {
+          btn.classList.remove('loading');
+          btn.innerHTML = '🎯';
+        }
+      }, (err) => {
+        btn.classList.remove('loading');
+        btn.innerHTML = '🎯';
+        let msg = "Impossible de récupérer votre position.";
+        if (err.code === 1) msg = "Veuillez autoriser l'accès à votre position dans votre navigateur.";
+        alert(msg);
+      }, { enableHighAccuracy: true, timeout: 5000 });
+    }
+
     // ── SMART SUGGESTIONS ──
     const PLACES = [
-      { name: 'Aéroport Nice Côte d\'Azur', detail: 'NCE — Terminal 1 & 2', icon: '✈️', badge: 'Populaire' },
+      { name: 'Nans-les-Pins', detail: 'Var (83) — Centre-ville', icon: '📍', badge: 'Secteur' },
+      { name: 'Carcès', detail: 'Var (83) — Centre-ville', icon: '📍', badge: 'Secteur' },
+      { name: 'Brignoles', detail: 'Var (83) — Centre-ville', icon: '📍', badge: 'Secteur' },
+      { name: 'Saint-Maximin', detail: 'la-Sainte-Baume', icon: '📍', badge: 'Secteur' },
+      { name: 'Fréjus / Saint-Raphaël', detail: 'Var (83)', icon: '📍', badge: null },
+      { name: 'Draguignan', detail: 'Var (83)', icon: '📍', badge: null },
+      { name: 'Saint-Tropez', detail: 'Presqu\'île', icon: '📍', badge: 'Prestige' },
+      { name: 'Aéroport Nice Côte d\'Azur', detail: 'NCE — Terminaux 1 & 2', icon: '✈️', badge: 'Populaire' },
       { name: 'Aéroport Marseille-Provence', detail: 'MRS — Hall 1 & 2', icon: '✈️', badge: 'Populaire' },
       { name: 'Gare d\'Aix-en-Provence TGV', detail: 'Plateau de l\'Arbois', icon: '🚄', badge: 'Populaire' },
-      { name: 'Gare de Marseille-Saint-Charles', detail: 'Place Victor Hugo', icon: '🚄', badge: null },
-      { name: 'Hôpital de Brignoles', detail: 'Jean-Marcel — Centre Hospitalier', icon: '🏥', badge: 'Médical' },
-      { name: 'Institut Paoli-Calmettes', detail: 'Marseille — Oncologie', icon: '🏥', badge: 'Médical' },
-      { name: 'Nans-les-Pins', detail: 'Var — Centre-ville', icon: '📍', badge: null },
-      { name: 'Carcès', detail: 'Var — Centre-ville', icon: '📍', badge: null },
+      { name: 'Gare de Marseille Saint-Charles', detail: 'Marseille (13)', icon: '🚄', badge: null },
+      { name: 'Hôpital de Brignoles', detail: 'Centre Hospitalier Jean-Marcel', icon: '🏥', badge: 'Médical' },
+      { name: 'Clinique de la Ciotat', detail: 'Bouches-du-Rhône (13)', icon: '🏥', badge: 'Médical' },
+      { name: 'Institut Paoli-Calmettes', detail: 'Marseille — Oncologie', icon: '🏥', badge: 'Médical' }
     ];
 
     function showSuggestions(id, val) {
@@ -2439,13 +2519,19 @@
         p.detail.toLowerCase().includes(val.toLowerCase())
       ).slice(0, 4);
       if (!filtered.length) { box.classList.remove('show'); return; }
-      box.innerHTML = filtered.map(p =>
-        '<div class="suggestion-item" onmousedown="selectSug(\'' + id + '\',\'' + p.name.replace(/'/g, "\\'") + '\')">' +
-        '<div class="sug-icon">' + p.icon + '</div>' +
-        '<div class="sug-text"><div class="sug-name">' + p.name + '</div><div class="sug-detail">' + p.detail + '</div></div>' +
-        (p.badge ? '<div class="sug-badge">' + p.badge + '</div>' : '') +
-        '</div>'
-      ).join('');
+      box.innerHTML = filtered.map(p => {
+        const escapedName = p.name.replace(/'/g, "\\'");
+        return `
+          <div class="suggestion-item" onmousedown="selectSug('${id}','${escapedName}')">
+            <div class="sug-icon">${p.icon}</div>
+            <div class="sug-text">
+              <div class="sug-name">${p.name}</div>
+              <div class="sug-detail">${p.detail}</div>
+            </div>
+            ${p.badge ? `<div class="sug-badge">${p.badge}</div>` : ''}
+          </div>
+        `;
+      }).join('');
       box.classList.add('show');
     }
 
