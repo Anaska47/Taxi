@@ -1,9 +1,9 @@
 import fs from 'fs';
 
 const cities = [
-    // VAR (83)
-    "Brignoles", "Nans-les-Pins", "Carcès", "Fréjus", "Saint-Raphaël", "Draguignan", "Saint-Tropez", "Sainte-Maxime",
-    "Cogolin", "Le Muy", "Vidauban", "Le Luc", "Lorgues", "Garéoult", "Saint-Maximin-la-Sainte-Baume", "Rocbaron", "Tourves", "Le Val", "Cotignac", "Barjols",
+    // VAR (83) - COUVERTURE TOTALE
+    "Brignoles", "Le Val", "Carces", "Montfort", "Cotignac", "Entrecasteaux", "Salerne", "Barjols", "Châteauvert", "Varrages", "Tavernes", "Aups", "Seillons-Sources-d'argens", "Brue-auriac", "Pontevès", "Saint-maximin-la-sainte-baume", "Tourves", "Rougiers", "Nans-les-pins", "Bras", "Correns", "Lorgues", "Cabasse", "Flassans-sur-issole", "Camps-la-source", "Le Luc", "Le Cannet-des-maures", "Le Thoronet", "Vidauban", "Taradeau", "Les arcs", "Trans-en-Provence", "Draguignan", "Le muy", "La motte", "Fréjus", "Roquebrune-sur-Argens", "Puget-sur-argens", "Saint-Raphaël", "Besse-sur-issole", "Gonfaron", "Carnoules", "Pignans", "Puget-ville", "Saint-anastasie-sur-issole", "Forcalqueiret", "Rocbaron", "Garéoult", "Néoules", "La roquebrussanne", "Mazaugues", "Méounes-lès-montrieux", "Belgentier",
+    "Saint-Tropez", "Sainte-Maxime", "Cogolin", "Le Muy", "Taradeau", "Bormes-les-Mimosas", "Le Lavandou", "Hyères", "Toulon", "La Seyne-sur-Mer",
 
     // ALPES-MARITIMES (06)
     "Nice", "Cannes", "Antibes", "Grasse", "Cagnes-sur-Mer", "Le Cannet", "Saint-Laurent-du-Var", "Menton", "Vallauris", "Mandelieu-la-Napoule", "Mougins", "Vence",
@@ -11,11 +11,8 @@ const cities = [
     // BOUCHES-DU-RHÔNE (13)
     "Marseille", "Aix-en-Provence", "Arles", "Martigues", "Aubagne", "Salon-de-Provence", "Istres", "Vitrolles", "Marignane", "La Ciotat", "Gardanne", "Les Pennes-Mirabeau",
 
-    // VAUCLUSE (84) - LUBERON/PROVENCE
-    "Avignon", "Orange", "Carpentras", "Cavaillon", "Pertuis", "Sorgues", "L'Isle-sur-la-Sorgue", "Apt", "Gordes", "Bonnieux", "Lourmarin", "Valensole",
-
-    // GARD (30)
-    "Nîmes", "Alès", "Uzès", "Bagnols-sur-Cèze", "Beaucaire", "Villeneuve-lès-Avignon"
+    // VAUCLUSE (84) & GARD (30)
+    "Avignon", "Orange", "Carpentras", "Cavaillon", "Pertuis", "Nîmes", "Alès", "Uzès"
 ];
 
 const highTicketDestinations = [
@@ -45,6 +42,64 @@ const hubs = [
     { name: "Gare de Nice-Ville", slug: "gare-nice" },
     { name: "Gare d'Avignon TGV", slug: "gare-avignon-tgv" },
     { name: "Héliport de Monaco", slug: "heliport-monaco" }
+];
+
+const hospitals = [
+    // MARSEILLE
+    { name: "La Timone", city: "Marseille", slug: "la-timone" },
+    { name: "Chanteclerc Rééducation", city: "Marseille", slug: "chanteclerc" },
+    { name: "Hôpital de la Conception Marseille", city: "Marseille", slug: "conception-marseille" },
+    { name: "Institut Paoli-Calmettes", city: "Marseille", slug: "paoli-calmettes" },
+    { name: "Hôpital Nord", city: "Marseille", slug: "hopital-nord" },
+    { name: "Hôpital Clairval", city: "Marseille", slug: "clairval" },
+    { name: "Hôpital Sainte Marguerite", city: "Marseille", slug: "st-marguerite" },
+    { name: "Hôpital Européen", city: "Marseille", slug: "hopital-europeen" },
+
+    // AIX
+    { name: "Hôpital Privé de Provence (HPP)", city: "Aix-en-Provence", slug: "hpp-aix" },
+    { name: "Clinique Axium", city: "Aix-en-Provence", slug: "axium" },
+    { name: "Centre Hospitalier du Pays d'Aix", city: "Aix-en-Provence", slug: "ch-pays-aix" },
+    { name: "Hôpital de Pertuis (CHI Aix-Pertuis)", city: "Pertuis", slug: "hopital-pertuis" },
+
+    // AUBAGNE
+    { name: "Hôpital La Casamance", city: "Aubagne", slug: "casamance" },
+    { name: "Hôpital d'Aubagne", city: "Aubagne", slug: "hopital-aubagne" },
+    { name: "Centre de Dialyse Aubagne", city: "Aubagne", slug: "dialyse-aubagne" },
+
+    // TOULON / VAR
+    { name: "Hôpital Sainte-Musse", city: "Toulon", slug: "sainte-musse" },
+    { name: "Hôpital Sainte-Anne", city: "Toulon", slug: "sainte-anne" },
+    { name: "Hôpital Croix Rouge", city: "Toulon", slug: "croix-rouge-toulon" },
+    { name: "Clinique Saint Michel", city: "Toulon", slug: "st-michel-toulon" },
+    { name: "Clinique Saint Jean", city: "Toulon", slug: "st-jean-toulon" },
+    { name: "Clinique Saint Roch", city: "Toulon", slug: "st-roch-toulon" },
+    { name: "Clinique Hélio-Marin", city: "Hyères", slug: "helio-marin" },
+    { name: "Polyclinique Les Fleurs", city: "Ollioules", slug: "polyclinique-fleurs" },
+    { name: "Centre de Dialyse", city: "Toulon", slug: "centre-dialyse-toulon" },
+    { name: "Hôpital René Sabran", city: "Hyères", slug: "rene-sabran" },
+    { name: "Hôpital Châteaubriand", city: "Hyères", slug: "chateaubriand" },
+    { name: "Hôpital Léon Bérard", city: "Hyères", slug: "leon-berard" },
+    { name: "Hôpital San Salvadour AP-HP", city: "Hyères", slug: "san-salvadour" },
+
+    // FRÉJUS / NICE
+    { name: "CHI Fréjus - Saint-Raphaël", city: "Fréjus", slug: "chi-frejus-st-raphael" },
+    { name: "CERS Saint-Raphaël", city: "Saint-Raphaël", slug: "cers-st-raphael" },
+    { name: "CHU de Nice - Hôpital Pasteur 2", city: "Nice", slug: "pasteur-2" },
+    { name: "Hôpital l'Archet", city: "Nice", slug: "archet-nice" },
+    { name: "Hôpital de Cimiez", city: "Nice", slug: "cimiez-nice" },
+    { name: "Fondation Lenval", city: "Nice", slug: "lenval-nice" },
+    { name: "Clinique du Parc Impérial", city: "Nice", slug: "parc-imperial" },
+    { name: "Clinique Saint Georges", city: "Nice", slug: "st-georges-nice" },
+    { name: "Hôpital Les Sources", city: "Nice", slug: "les-sources-nice" },
+    { name: "Polyclinique Santa Maria", city: "Nice", slug: "santa-maria" },
+    { name: "Clinique Kantys Centre", city: "Nice", slug: "kantys" },
+
+    // MONTPELLIER
+    { name: "CHU Lapeyronie", city: "Montpellier", slug: "lapeyronie-montpellier" },
+    { name: "CHU de Montpellier", city: "Montpellier", slug: "chu-montpellier" },
+    { name: "Clinique du Millénaire", city: "Montpellier", slug: "clinique-millenaire" },
+    { name: "Hôpital Arnaud de Villeneuve", city: "Montpellier", slug: "arnaud-villeneuve" },
+    { name: "Hôpital Gui de Chauliac", city: "Montpellier", slug: "gui-de-chauliac" }
 ];
 
 const services = [
@@ -152,6 +207,23 @@ cities.forEach(cityStart => {
             };
             sitemap.push(`${baseUrl}?p=${slug}`);
         }
+    });
+});
+
+// 6. Transport Médical Spécialisé : Villes de départ -> Hôpitaux
+cities.forEach(city => {
+    hospitals.forEach(hosp => {
+        const slug = `taxi-medical-${city.toLowerCase().replace(/ /g, '-')}-vers-${hosp.slug}`;
+        seoData[slug] = {
+            title: `Taxi Médical ${city} vers ${hosp.name} — Transport Conventionné CPAM`,
+            metaDesc: `Besoin d'un taxi conventionné de ${city} vers ${hosp.name} ? Sam Taxi assure votre transport médical vers ${hosp.city} avec prise en charge CPAM à 100%.`,
+            h1: `Taxi Médical de ${city}<br>vers <em>${hosp.name}</em>`,
+            heroSub: `Chauffeur certifié et véhicule discret. Ponctualité garantie pour vos rendez-vous médicaux et consultations.`,
+            city: city,
+            destination: hosp.name,
+            service: "Médical"
+        };
+        sitemap.push(`${baseUrl}?p=${slug}`);
     });
 });
 

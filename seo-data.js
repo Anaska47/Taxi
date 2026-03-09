@@ -89,6 +89,8 @@ async function initDynamicSEO() {
         const checkType = setInterval(() => {
             if (typeof setType === 'function') {
                 setType('medical');
+                const card = document.getElementById('bookingCard');
+                if (card) card.scrollIntoView({ behavior: 'smooth' });
                 clearInterval(checkType);
             }
         }, 50);

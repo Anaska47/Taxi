@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard SEO - Sam Taxi (1480 Pages)</title>
+    <title>Dashboard SEO - Sam Taxi (8908 Pages)</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap"
         rel="stylesheet">
     <style>
@@ -235,7 +235,7 @@
             <p>Sommaire technique de la stratégie SEO Programmatique</p>
             <div class="stats">
                 <div class="stat-item">
-                    <span class="stat-value">1480</span>
+                    <span class="stat-value" id="total-pages">8908</span>
                     <span class="stat-label">Pages SEO Libérées</span>
                 </div>
                 <div class="stat-item">
@@ -276,11 +276,17 @@
                 const data = await response.json();
                 const grid = document.getElementById('main-grid');
 
+                // Update total count dynamically
+                const totalCount = Object.keys(data).length;
+                document.getElementById('total-pages').textContent = totalCount;
+                document.title = `Dashboard SEO - Sam Taxi (${totalCount} Pages)`;
+
                 // Groupement par catégories
                 const categories = {
                     "Liaisons Inter-Hubs (Aéroports/Gares)": [],
                     "Navettes Aéroport VIP": [],
                     "Longue Distance Haute Valeur": [],
+                    "Liaisons Inter-Villes PACA": [],
                     "Transport Médical (CPAM)": [],
                     "Services Premium par Ville": []
                 };
@@ -289,14 +295,21 @@
                     const item = data[slug];
                     const link = `<a href="${baseUrl}${slug}" target="_blank" class="seo-link">${item.title}</a>`;
 
-                    if (slug.startsWith('transfert-aeroport') || slug.startsWith('transfert-gare')) {
+                    if (slug.startsWith('transfert-aeroport') || slug.startsWith('transfert-gare') || slug.startsWith('transfert-gare') || slug.startsWith('transfert-heliport')) {
                         categories["Liaisons Inter-Hubs (Aéroports/Gares)"].push(link);
                     } else if (slug.includes('navette-aeroport')) {
                         categories["Navettes Aéroport VIP"].push(link);
-                    } else if (slug.includes('vers-')) {
-                        categories["Longue Distance Haute Valeur"].push(link);
                     } else if (slug.includes('medical')) {
                         categories["Transport Médical (CPAM)"].push(link);
+                    } else if (slug.includes('vers-') && (slug.includes('paris') || slug.includes('lyon') || slug.includes('geneve') || slug.includes('monaco') || slug.includes('milan') || slug.includes('turin') || slug.includes('barcelone'))) {
+                        categories["Longue Distance Haute Valeur"].push(link);
+                    } else if (slug.includes('vers-')) {
+                        // Check if it's city to city or hub to city
+                        if (slug.startsWith('transfert-')) {
+                            categories["Liaisons Inter-Hubs (Aéroports/Gares)"].push(link);
+                        } else {
+                            categories["Liaisons Inter-Villes PACA"].push(link);
+                        }
                     } else {
                         categories["Services Premium par Ville"].push(link);
                     }
