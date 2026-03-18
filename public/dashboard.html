@@ -326,13 +326,97 @@
                 grid-template-columns: 1fr 1fr;
             }
         }
+
+        <style>
+
+        /* --- AUTH STYLING --- */
+        #authOverlay {
+            position: fixed;
+            inset: 0;
+            background: var(--black);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .auth-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            padding: 40px;
+            border-radius: 24px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .auth-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border);
+            padding: 16px;
+            border-radius: 12px;
+            color: white;
+            font-size: 18px;
+            text-align: center;
+            margin: 20px 0;
+            outline: none;
+        }
+
+        .auth-input:focus {
+            border-color: var(--gold);
+        }
+
+        .auth-btn {
+            width: 100%;
+            background: var(--gold);
+            color: var(--black);
+            border: none;
+            padding: 16px;
+            border-radius: 12px;
+            font-weight: 800;
+            cursor: pointer;
+            font-family: 'Syne', sans-serif;
+        }
+
+        #dashboardContent {
+            display: none;
+        }
+
+        body.authenticated #dashboardContent {
+            display: block;
+        }
+
+        body.authenticated #authOverlay {
+            display: none;
+        }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <header>
+    <!-- Password Protection -->
+    <div id="authOverlay">
+        <div class="auth-card">
             <div class="logo">SAM<span>.</span>TAXI</div>
+            <h2 style="font-family: 'Syne', sans-serif; margin-bottom: 10px;">Accès Restreint</h2>
+            <p style="color: var(--muted); font-size: 14px;">Veuillez entrer le code d'accès pour consulter le dashboard
+                SEO.</p>
+            <input type="password" id="authPass" class="auth-input" placeholder="Code d'accès">
+            <button onclick="checkAuth()" class="auth-btn">Déverrouiller</button>
+            <p id="authError" style="color: #ef4444; font-size: 12px; margin-top: 15px; display: none;">Code incorrect.
+                Veuillez réessayer.</p>
+        </div>
+    </div>
+
+    <div id="dashboardContent" class="container">
+        <header>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                <div class="logo" style="margin-bottom: 0;">SAM<span>.</span>TAXI</div>
+                <button onclick="logout()"
+                    style="background: transparent; border: 1px solid var(--border); color: var(--muted); padding: 8px 16px; border-radius: 100px; cursor: pointer; font-size: 12px;">Déconnexion</button>
+            </div>
             <h1>SEO Machine Dashboard</h1>
             <p class="subtitle">Propulsez votre visibilité avec notre réseau de pages intelligentes et ultra-ciblées.
             </p>
@@ -487,7 +571,35 @@
             });
         });
 
-        init();
+        // Authentication Logic
+        const ACCESS_CODE = "SAM2026"; // Code d'accès simple
+
+        function checkAuth() {
+            const pass = document.getElementById('authPass').value;
+            if (pass === ACCESS_CODE) {
+                localStorage.setItem('dashboard_auth', 'true');
+                document.body.classList.add('authenticated');
+                init(); // Lancer le chargement des données
+            } else {
+                document.getElementById('authError').style.display = 'block';
+            }
+        }
+
+        function logout() {
+            localStorage.removeItem('dashboard_auth');
+            location.reload();
+        }
+
+        // Auto-check on load
+        if (localStorage.getItem('dashboard_auth') === 'true') {
+            document.body.classList.add('authenticated');
+            init();
+        }
+
+        // Allow 'Enter' key to submit
+        document.getElementById('authPass')?.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') checkAuth();
+        });
     </script>
 </body>
 

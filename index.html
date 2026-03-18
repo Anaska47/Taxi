@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 
 <head>
@@ -1885,6 +1885,58 @@
       background: var(--border);
       border-radius: 3px;
     }
+    /* ── SEO FOOTER LINKS ── */
+    .seo-footer-links {
+      background: #0d0d0d;
+      padding: 60px 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .seo-grid {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 30px;
+    }
+
+    .seo-group-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--gold);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .seo-links-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .seo-link {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 13px;
+      transition: color 0.2s;
+    }
+
+    .seo-link:hover {
+      color: var(--white);
+    }
+
+    .seo-link::before {
+      content: '→';
+      margin-right: 6px;
+      font-size: 10px;
+      opacity: 0.5;
+    }
   </style>
 </head>
 
@@ -2339,6 +2391,52 @@
       <a href="tel:+33644031931" class="car-cinematic-cta">📞 Réserver ce véhicule</a>
     </div>
   </div>
+
+  <!-- SEO INTERNAL LINKING -->
+  <section class="seo-footer-links">
+    <div class="seo-grid">
+      <div>
+        <div class="seo-group-title">📍 Secteur Var Centre</div>
+        <ul class="seo-links-list">
+          <li><a href="index.html?p=taxi-prive-luxe-brignoles" class="seo-link">Taxi Brignoles</a></li>
+          <li><a href="index.html?p=taxi-prive-luxe-nans-les-pins" class="seo-link">Taxi Nans-les-Pins</a></li>
+          <li><a href="index.html?p=taxi-prive-luxe-carces" class="seo-link">Taxi Carcès</a></li>
+          <li><a href="index.html?p=taxi-prive-luxe-saint-maximin-la-sainte-baume" class="seo-link">Taxi Saint-Maximin</a></li>
+          <li><a href="index.html?p=taxi-prive-luxe-tourves" class="seo-link">Taxi Tourves</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="seo-group-title">🏢 Grandes Villes & Hubs</div>
+        <ul class="seo-links-list">
+          <li><a href="index.html?p=taxi-prive-luxe-toulon" class="seo-link">Taxi Toulon</a></li>
+          <li><a href="index.html?p=taxi-prive-luxe-hyeres" class="seo-link">Taxi Hyères</a></li>
+          <li><a href="index.html?p=taxi-prive-luxe-draguignan" class="seo-link">Taxi Draguignan</a></li>
+          <li><a href="index.html?p=taxi-prive-luxe-aix-en-provence" class="seo-link">Taxi Aix-en-Provence</a></li>
+          <li><a href="index.html?p=taxi-prive-luxe-marseille" class="seo-link">Taxi Marseille</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="seo-group-title">💎 Côte d'Azur & Prestige</div>
+        <ul class="seo-links-list">
+          <li><a href="index.html?p=taxi-prive-luxe-saint-tropez" class="seo-link">Taxi Saint-Tropez</a></li>
+          <li><a href="index.html?p=taxi-prive-luxe-sainte-maxime" class="seo-link">Taxi Sainte-Maxime</a></li>
+          <li><a href="index.html?p=taxi-prive-luxe-frejus" class="seo-link">Taxi Fréjus</a></li>
+          <li><a href="index.html?p=taxi-prive-luxe-cannes" class="seo-link">Taxi Cannes</a></li>
+          <li><a href="index.html?p=taxi-prive-luxe-nice" class="seo-link">Taxi Nice</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="seo-group-title">🏥 Transport Médical</div>
+        <ul class="seo-links-list">
+          <li><a href="index.html?p=taxi-medical-brignoles" class="seo-link">Taxi Médical Brignoles</a></li>
+          <li><a href="index.html?p=taxi-medical-marseille" class="seo-link">Taxi Conventionné Marseille</a></li>
+          <li><a href="index.html?p=taxi-medical-toulon" class="seo-link">VTC Médical Toulon</a></li>
+          <li><a href="index.html?p=taxi-medical-frejus" class="seo-link">Taxi CPAM Fréjus</a></li>
+          <li><a href="index.html?p=taxi-medical-nice" class="seo-link">Transport CPAM Nice</a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
 
   <!-- FOOTER -->
   <footer>

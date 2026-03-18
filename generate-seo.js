@@ -230,12 +230,28 @@ cities.forEach(city => {
 // Modifie les chemins de sortie pour s'assurer qu'ils aillent directement dans le dossier public
 fs.writeFileSync('public/seo-data-master.json', JSON.stringify(seoData, null, 2));
 
-// Génération du Sitemap XML
-const xml = `<?xml version="1.0" encoding="UTF-8"?>
+// 7. Génération des fichiers Sitemap (Découpage par lots de 5000 pour Google)
+const CHUNK_SIZE = 5000;
+const sitemapChunks = [];
+
+for (let i = 0; i < sitemap.length; i += CHUNK_SIZE) {
+    sitemapChunks.push(sitemap.slice(i, i + CHUNK_SIZE));
+}
+
+sitemapChunks.forEach((chunk, index) => {
+    const chunkXml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${sitemap.map(url => `  <url><loc>${url}</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>`).join('\n')}
+${chunk.map(url => `  <url><loc>${url}</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>`).join('\n')}
 </urlset>`;
+    fs.writeFileSync(`public/sitemap-${index + 1}.xml`, chunkXml);
+});
 
-fs.writeFileSync('public/sitemap.xml', xml);
+// Génération du Sitemap Index
+const indexXml = `<?xml version="1.0" encoding="UTF-8"?>
+<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemapChunks.map((_, index) => `  <sitemap><loc>https://sam-taxi.fr/sitemap-${index + 1}.xml</loc></sitemap>`).join('\n')}
+</sitemapindex>`;
 
-console.log(`✅ Génération terminée : ${sitemap.length} pages créées.`);
+fs.writeFileSync('public/sitemap.xml', indexXml);
+
+console.log(`✅ Génération terminée : ${sitemap.length} pages réparties en ${sitemapChunks.length} fichiers sitemaps.`);
