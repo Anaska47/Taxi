@@ -111,7 +111,7 @@ const services = [
 
 const seoData = {};
 const sitemap = [];
-const baseUrl = "https://sam-taxi.fr/index.html";
+const baseUrl = "https://sam-taxi.fr/";
 
 // 1. Pages Villes x Services (Classique)
 cities.forEach(city => {

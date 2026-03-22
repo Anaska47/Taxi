@@ -38,6 +38,15 @@ async function initDynamicSEO() {
     // --- MISE À JOUR DU DOM ---
     document.title = data.title;
 
+    // Injection balise canonique (évite "page avec redirection")
+    let canonicalLink = document.querySelector('link[rel="canonical"]');
+    if (!canonicalLink) {
+        canonicalLink = document.createElement('link');
+        canonicalLink.rel = 'canonical';
+        document.head.appendChild(canonicalLink);
+    }
+    canonicalLink.href = 'https://sam-taxi.fr/' + (pageKey === 'default' ? '' : '?p=' + pageKey);
+
     let metaDesc = document.querySelector('meta[name="description"]');
     if (!metaDesc) {
         metaDesc = document.createElement('meta');
