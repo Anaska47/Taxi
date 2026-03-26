@@ -76,8 +76,6 @@ async function initDynamicSEO() {
         const eliteTitle = document.querySelector('.car-header .section-title em');
         if (eliteTitle) eliteTitle.textContent = `Confort & Prestige à ${data.city}`;
 
-        const footerTown = document.querySelector('.footer-legal strong');
-        if (footerTown) footerTown.textContent = data.city;
 
         // Pré-remplissage intelligent du formulaire
         const fromInput = document.getElementById('fromInput');
