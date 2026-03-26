@@ -1976,6 +1976,72 @@
       opacity: 0.5;
     }
   </style>
+<style>
+/* ── WOW EFFECT STYLES ── */
+body {
+  transition: background 1.5s ease, background-color 1.5s ease;
+}
+body.theme-private {
+  background: var(--black);
+}
+body.theme-medical {
+  --gold: var(--blue);
+  --gold-dim: var(--blue-dim);
+  background: radial-gradient(circle at top left, rgba(59, 130, 246, 0.12) 0%, #060913 80%);
+}
+body.theme-medical .hero-glow {
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
+}
+body.theme-medical .step-num {
+  color: rgba(59, 130, 246, 0.15);
+}
+body.theme-medical .booking-card {
+  box-shadow: 0 10px 40px rgba(59, 130, 246, 0.08);
+}
+body.theme-medical .type-selector {
+  background: #060913;
+  border-color: rgba(59, 130, 246, 0.2);
+}
+body.theme-medical .service-card.private {
+  opacity: 0.6;
+  filter: grayscale(80%);
+}
+.reveal {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+.mic-btn {
+  background: none;
+  border: none;
+  color: var(--muted);
+  padding: 0 14px;
+  cursor: pointer;
+  font-size: 18px;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.mic-btn:hover {
+  color: var(--gold);
+  transform: scale(1.1);
+}
+.booking-card.medical .mic-btn:hover {
+  color: var(--blue);
+}
+.mic-btn.listening {
+  color: #ff4444;
+  animation: pulseMic 1.5s infinite;
+}
+@keyframes pulseMic {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+</style>
 </head>
 
 <body>
@@ -2217,6 +2283,8 @@
         <div class="sc-tags">
           <span class="sc-tag">Dialyse</span>
           <span class="sc-tag">Chimio</span>
+          <span class="sc-tag">Radiothérapie</span>
+          <span class="sc-tag">Consultation</span>
           <span class="sc-tag">CPAM</span>
           <span class="sc-tag">Fauteuil roulant</span>
         </div>
@@ -2976,6 +3044,100 @@
     });
   </script>
   <script src="seo-data.js"></script>
+<script>
+// ── WOW EFFECT SCRIPTS ──
+(function(){
+  const originalSetType = window.setType;
+  let audioCtx = null;
+  
+  function playTick() {
+    try {
+      if (!audioCtx) {
+        const AudioContext = window.AudioContext || window.webkitAudioContext;
+        if (!AudioContext) return;
+        audioCtx = new AudioContext();
+      }
+      if(audioCtx.state === 'suspended') audioCtx.resume();
+      const osc = audioCtx.createOscillator();
+      const gainNode = audioCtx.createGain();
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(800, audioCtx.currentTime);
+      osc.frequency.exponentialRampToValueAtTime(1200, audioCtx.currentTime + 0.05);
+      gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+      gainNode.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.1);
+      osc.connect(gainNode);
+      gainNode.connect(audioCtx.destination);
+      osc.start();
+      osc.stop(audioCtx.currentTime + 0.1);
+    } catch(e) {}
+  }
+
+  window.setType = function(type) {
+    if (window.currentType !== type) {
+      playTick();
+      document.body.className = 'theme-' + type;
+    }
+    if (originalSetType) originalSetType(type);
+  };
+  
+  setTimeout(() => { document.body.className = 'theme-' + (window.currentType || 'private'); }, 100);
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if(entry.isIntersecting) {
+        entry.target.classList.add('active');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.service-card, .step, .review, .stats-strip').forEach((el, index) => {
+    el.classList.add('reveal');
+    el.style.transitionDelay = (index % 3) * 0.1 + 's';
+    observer.observe(el);
+  });
+  
+  const textInputs = document.querySelectorAll('input[type="text"]');
+  textInputs.forEach(input => {
+    if (input.closest('.field-row') && input.placeholder !== "Ex: Jean Dupont") {
+      const micBtn = document.createElement('button');
+      micBtn.className = 'mic-btn';
+      micBtn.innerHTML = '🎙️';
+      micBtn.title = "Dicter l'adresse";
+      input.closest('.field-row').appendChild(micBtn);
+      
+      micBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRec) {
+          alert("La dictée vocale n'est pas supportée sur ce navigateur.");
+          return;
+        }
+        const recognition = new SpeechRec();
+        recognition.lang = 'fr-FR';
+        recognition.interimResults = false;
+        
+        const originalPlaceholder = input.placeholder;
+        recognition.onstart = () => {
+          micBtn.classList.add('listening');
+          input.placeholder = "Écoute en cours...";
+        };
+        recognition.onresult = (event) => {
+          input.value = event.results[0][0].transcript;
+        };
+        recognition.onerror = () => {
+           input.placeholder = "Erreur...";
+        };
+        recognition.onend = () => {
+          micBtn.classList.remove('listening');
+          setTimeout(() => { if(!input.value) input.placeholder = originalPlaceholder; }, 1000);
+        };
+        recognition.start();
+      });
+    }
+  });
+})();
+</script>
 </body>
 
 </html>
