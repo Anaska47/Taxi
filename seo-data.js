@@ -1,5 +1,5 @@
 // SEO ENGINE v2.0 - Gestion de masse (1000+ pages)
-let SEO_DATA_MASTER = {};
+window.SEO_DATA_MASTER = {};
 
 // On garde quelques pages clés en dur pour le chargement instantané
 const SEO_STATIC = {
@@ -22,11 +22,11 @@ async function initDynamicSEO() {
     if (!data && pageKey !== 'default') {
         try {
             // On charge le gros fichier JSON seulement si nécessaire
-            if (Object.keys(SEO_DATA_MASTER).length === 0) {
+            if (Object.keys(window.SEO_DATA_MASTER).length === 0) {
                 const response = await fetch('seo-data-master.json');
-                SEO_DATA_MASTER = await response.json();
+                window.SEO_DATA_MASTER = await response.json();
             }
-            data = SEO_DATA_MASTER[pageKey];
+            data = window.SEO_DATA_MASTER[pageKey];
         } catch (e) {
             console.error("Erreur chargement SEO Master:", e);
         }

@@ -1975,6 +1975,70 @@
       color: var(--gold);
       opacity: 0.5;
     }
+
+    /* ── NEW SEO FOOTER GRID ── */
+    .seo-grid-columns {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 30px;
+      margin-bottom: 40px;
+    }
+    .seo-col-title {
+      font-family: 'Syne', sans-serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+    .seo-links-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .seo-all-links-btn {
+      text-align: center;
+      padding: 15px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--gold);
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s;
+      margin-top: 20px;
+    }
+    .seo-all-links-btn:hover {
+      background: var(--gold-dim);
+      border-color: var(--gold);
+    }
+    .seo-hidden-links-grid {
+      display: none;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 10px;
+      margin-top: 30px;
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: 16px;
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    .seo-hidden-links-grid.show {
+      display: grid;
+    }
+    .seo-hidden-links-grid a {
+      font-size: 12px;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .seo-hidden-links-grid a:hover {
+      color: var(--white);
+    }
   </style>
 <style>
 /* ── WOW EFFECT STYLES ── */
@@ -2049,8 +2113,8 @@ body.theme-medical .service-card.private {
   margin: 10px 0 25px;
   position: relative;
   display: flex;
-  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
   -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
 }
 .marquee-content {
   display: flex;
@@ -2548,54 +2612,81 @@ body.theme-medical .marquee-item span {
   </div>
 
   <!-- SEO INTERNAL LINKING -->
+  <!-- SEO INTERNAL LINKING -->
   <section class="seo-footer-links">
     <div class="seo-container">
       
-      <details class="seo-details">
-        <summary class="seo-summary">📍 Secteur Var Centre</summary>
-        <div class="seo-links-grid">
-          <a href="/?p=taxi-prive-luxe-brignoles" class="seo-link">Taxi Brignoles</a>
-          <a href="/?p=taxi-prive-luxe-nans-les-pins" class="seo-link">Taxi Nans-les-Pins</a>
-          <a href="/?p=taxi-prive-luxe-carces" class="seo-link">Taxi Carcès</a>
-          <a href="/?p=taxi-prive-luxe-saint-maximin-la-sainte-baume" class="seo-link">Taxi Saint-Maximin</a>
-          <a href="/?p=taxi-prive-luxe-tourves" class="seo-link">Taxi Tourves</a>
-          <a href="/?p=taxi-prive-luxe-lorgues" class="seo-link">Taxi Lorgues</a>
+      <div class="seo-grid-columns">
+        
+        <!-- VAR (83) -->
+        <div class="seo-col">
+          <div class="seo-col-title">📍 Secteur Var (83)</div>
+          <div class="seo-links-list">
+            <a href="/?p=taxi-prive-luxe-brignoles" class="seo-link">Taxi Brignoles</a>
+            <a href="/?p=taxi-prive-luxe-nans-les-pins" class="seo-link">Taxi Nans-les-Pins</a>
+            <a href="/?p=taxi-prive-luxe-st-maximin" class="seo-link">Taxi St-Maximin</a>
+            <a href="/?p=taxi-prive-luxe-toulon" class="seo-link">Taxi Toulon</a>
+            <a href="/?p=taxi-prive-luxe-hyeres" class="seo-link">Taxi Hyères</a>
+            <a href="/?p=taxi-prive-luxe-st-tropez" class="seo-link">Taxi Saint-Tropez</a>
+            <a href="/?p=taxi-prive-luxe-frejus" class="seo-link">Taxi Fréjus</a>
+            <a href="/?p=taxi-prive-luxe-draguignan" class="seo-link">Taxi Draguignan</a>
+          </div>
         </div>
-      </details>
 
-      <details class="seo-details">
-        <summary class="seo-summary">🏢 Grandes Villes & Hubs</summary>
-        <div class="seo-links-grid">
-          <a href="/?p=taxi-prive-luxe-cannes" class="seo-link">Taxi Cannes</a>
-          <a href="/?p=taxi-prive-luxe-hyeres" class="seo-link">Taxi Hyères</a>
-          <a href="/?p=taxi-prive-luxe-draguignan" class="seo-link">Taxi Draguignan</a>
-          <a href="/?p=taxi-prive-luxe-aix-en-provence" class="seo-link">Taxi Aix-en-Provence</a>
-          <a href="/?p=taxi-prive-luxe-marseille" class="seo-link">Taxi Marseille</a>
-          <a href="/?p=taxi-prive-luxe-nice" class="seo-link">Taxi Nice</a>
+        <!-- BOUCHES DU RHONE (13) -->
+        <div class="seo-col">
+          <div class="seo-col-title">📍 Secteur BDR (13)</div>
+          <div class="seo-links-list">
+            <a href="/?p=taxi-prive-luxe-marseille" class="seo-link">Taxi Marseille</a>
+            <a href="/?p=taxi-prive-luxe-aix-en-provence" class="seo-link">Taxi Aix-en-Provence</a>
+            <a href="/?p=taxi-prive-luxe-la-ciotat" class="seo-link">Taxi La Ciotat</a>
+            <a href="/?p=taxi-prive-luxe-aubagne" class="seo-link">Taxi Aubagne</a>
+            <a href="/?p=taxi-prive-luxe-cassie" class="seo-link">Taxi Cassis</a>
+          </div>
         </div>
-      </details>
 
-      <details class="seo-details">
-        <summary class="seo-summary">💎 Côte d'Azur & Prestige</summary>
-        <div class="seo-links-grid">
-          <a href="/?p=taxi-prive-luxe-saint-tropez" class="seo-link">Taxi Saint-Tropez</a>
-          <a href="/?p=taxi-prive-luxe-sainte-maxime" class="seo-link">Taxi Sainte-Maxime</a>
-          <a href="/?p=taxi-prive-luxe-frejus" class="seo-link">Taxi Fréjus</a>
-          <a href="/?p=taxi-prive-luxe-vallauris" class="seo-link">Taxi Vallauris</a>
-          <a href="/?p=taxi-prive-luxe-antibes" class="seo-link">Taxi Antibes</a>
+        <!-- ALPES MARITIMES (06) -->
+        <div class="seo-col">
+          <div class="seo-col-title">📍 Secteur 06 & MC</div>
+          <div class="seo-links-list">
+            <a href="/?p=taxi-prive-luxe-nice" class="seo-link">Taxi Nice</a>
+            <a href="/?p=taxi-prive-luxe-cannes" class="seo-link">Taxi Cannes</a>
+            <a href="/?p=taxi-prive-luxe-monaco" class="seo-link">Taxi Monaco</a>
+            <a href="/?p=taxi-prive-luxe-antibes" class="seo-link">Taxi Antibes</a>
+          </div>
         </div>
-      </details>
 
-      <details class="seo-details">
-        <summary class="seo-summary">🏥 Transport Médical</summary>
-        <div class="seo-links-grid">
-          <a href="/?p=taxi-medical-brignoles" class="seo-link">Taxi Médical Brignoles</a>
-          <a href="/?p=taxi-medical-marseille" class="seo-link">Taxi Conventionné Marseille</a>
-          <a href="/?p=taxi-medical-lorgues" class="seo-link">Taxi VSL Lorgues</a>
-          <a href="/?p=taxi-medical-frejus" class="seo-link">Taxi CPAM Fréjus</a>
-          <a href="/?p=taxi-medical-nice" class="seo-link">Transport CPAM Nice</a>
+        <!-- HUBS & TRANSFERTS -->
+        <div class="seo-col">
+          <div class="seo-col-title">🛫 Gares & Aéroports</div>
+          <div class="seo-links-list">
+            <a href="/?p=transfert-aeroport-nice" class="seo-link">Aéroport Nice Côte d'Azur</a>
+            <a href="/?p=transfert-aeroport-marseille" class="seo-link">Aéroport Marseille-Provence</a>
+            <a href="/?p=transfert-gare-aix-tgv" class="seo-link">Gare Aix TGV</a>
+            <a href="/?p=transfert-gare-marseille" class="seo-link">Gare St-Charles</a>
+          </div>
         </div>
-      </details>
+
+        <!-- MEDICAL (VSL) -->
+        <div class="seo-col">
+          <div class="seo-col-title">🏥 Transport Médical</div>
+          <div class="seo-links-list">
+            <a href="/?p=taxi-medical-sainte-musse" class="seo-link">Hôpital Sainte-Musse</a>
+            <a href="/?p=taxi-medical-la-timone" class="seo-link">La Timone (Marseille)</a>
+            <a href="/?p=taxi-medical-brignoles" class="seo-link">Médical Brignoles</a>
+            <a href="/?p=taxi-medical-nans-les-pins" class="seo-link">Conventionné Nans-les-Pins</a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="seo-all-links-btn" onclick="toggleAllDestinations()">
+        Voir toutes nos 500+ destinations <span>↓</span>
+      </div>
+
+      <div id="allDestinations" class="seo-hidden-links-grid">
+         <!-- Dynamic listing of all cities from generate-seo.js cities list -->
+      </div>
 
     </div>
   </section>
@@ -3214,6 +3305,51 @@ body.theme-medical .marquee-item span {
       });
     }
   });
+
+  window.toggleAllDestinations = function() {
+    const grid = document.getElementById('allDestinations');
+    const btn = document.querySelector('.seo-all-links-btn');
+    const isShowing = grid.classList.toggle('show');
+    
+    if (isShowing) {
+      btn.innerHTML = 'Fermer la liste <span>↑</span>';
+      if (grid.children.length === 0) {
+        populateAllDestinations();
+      }
+      grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    } else {
+      btn.innerHTML = 'Voir toutes nos 500+ destinations <span>↓</span>';
+    }
+  };
+
+  async function populateAllDestinations() {
+    const grid = document.getElementById('allDestinations');
+    grid.innerHTML = '<div style="color:var(--gold);grid-column:1/-1;text-align:center;padding:20px;">Chargement du répertoire complet (20 000+ pages)...</div>';
+    
+    try {
+      if (typeof window.SEO_DATA_MASTER === 'undefined' || Object.keys(window.SEO_DATA_MASTER).length === 0) {
+        const response = await fetch('seo-data-master.json');
+        window.SEO_DATA_MASTER = await response.json();
+      }
+      
+      const keys = Object.keys(window.SEO_DATA_MASTER).sort();
+      grid.innerHTML = ''; 
+      
+      const fragment = document.createDocumentFragment();
+      keys.forEach(key => {
+        const item = window.SEO_DATA_MASTER[key];
+        const a = document.createElement('a');
+        a.href = `/?p=${key}`;
+        const name = (item.title || "").split('—')[0].trim();
+        a.textContent = name || key;
+        fragment.appendChild(a);
+      });
+      grid.appendChild(fragment);
+    } catch (e) {
+      console.error(e);
+      grid.innerHTML = '<div style="grid-column:1/-1;text-align:center;padding:20px;">Erreur de chargement.</div>';
+    }
+  }
 })();
 </script>
 </body>
